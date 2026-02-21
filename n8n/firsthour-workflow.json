@@ -41,7 +41,7 @@
         440,
         440
       ],
-      "notes": "Reads the maintained helpline/chargeback database from Google Sheets. This is REAL data the AI cannot know — numbers, URLs, and windows that change over time."
+      "notes": "Reads the maintained helpline/chargeback database from Google Sheets. This is REAL data the AI cannot know â€” numbers, URLs, and windows that change over time."
     },
     {
       "parameters": {
@@ -52,7 +52,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+              "value": "Bearer dummy"
             },
             {
               "name": "Content-Type",
@@ -97,7 +97,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+              "value": "Bearer dummy"
             },
             {
               "name": "Content-Type",
@@ -128,7 +128,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+              "value": "Bearer dummy"
             },
             {
               "name": "Content-Type",
@@ -159,7 +159,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+              "value": "Bearer dummy"
             },
             {
               "name": "Content-Type",
@@ -169,7 +169,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are a recovery advisor for cybercrime victims in India. ALWAYS lead with what CAN be done. Never be discouraging. Always respond with ONLY valid JSON, no markdown, no code fences.' }, { role: 'user', content: `Calculate recovery probability using this REAL chargeback data:\\n\\n- Incident time: ${$node['Merge Real Data + Classification'].json.webhookData.incidentTime}\\n- Current time: ${new Date().toISOString()}\\n- Payment platform: ${$node['Merge Real Data + Classification'].json.webhookData.paymentPlatform}\\n- Amount: ₹${$node['Merge Real Data + Classification'].json.webhookData.amountLost}\\n- ACTUAL chargeback window for this platform: ${$node['Merge Real Data + Classification'].json.chargebackWindow} hours\\n\\nUse the ACTUAL chargeback window above (not generic data) to calculate how much time the victim has left.\\n\\nRespond with JSON:\\n{\\n  \"percentage\": number between 15-90,\\n  \"message\": \"Hopeful message referencing the actual ${$node['Merge Real Data + Classification'].json.chargebackWindow}-hour window\",\\n  \"hoursRemaining\": number based on actual window,\\n  \"encouragement\": \"A short encouraging sentence\"\\n}` }], temperature: 0.3, max_tokens: 400 }) }}",
+        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are a recovery advisor for cybercrime victims in India. ALWAYS lead with what CAN be done. Never be discouraging. Always respond with ONLY valid JSON, no markdown, no code fences.' }, { role: 'user', content: `Calculate recovery probability using this REAL chargeback data:\\n\\n- Incident time: ${$node['Merge Real Data + Classification'].json.webhookData.incidentTime}\\n- Current time: ${new Date().toISOString()}\\n- Payment platform: ${$node['Merge Real Data + Classification'].json.webhookData.paymentPlatform}\\n- Amount: â‚¹${$node['Merge Real Data + Classification'].json.webhookData.amountLost}\\n- ACTUAL chargeback window for this platform: ${$node['Merge Real Data + Classification'].json.chargebackWindow} hours\\n\\nUse the ACTUAL chargeback window above (not generic data) to calculate how much time the victim has left.\\n\\nRespond with JSON:\\n{\\n  \"percentage\": number between 15-90,\\n  \"message\": \"Hopeful message referencing the actual ${$node['Merge Real Data + Classification'].json.chargebackWindow}-hour window\",\\n  \"hoursRemaining\": number based on actual window,\\n  \"encouragement\": \"A short encouraging sentence\"\\n}` }], temperature: 0.3, max_tokens: 400 }) }}",
         "options": {}
       },
       "id": "recovery-probability",
@@ -190,7 +190,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+              "value": "Bearer dummy"
             },
             {
               "name": "Content-Type",
@@ -200,7 +200,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are writing a complaint and action plan for a cybercrime victim in India. Write as if guiding a close friend. Use the REAL helpline numbers and URLs provided — do NOT make up any phone numbers or URLs. Always respond with ONLY valid JSON, no markdown, no code fences.' }, { role: 'user', content: `Victim details:\\n- Description: ${$node['Merge Real Data + Classification'].json.webhookData.description}\\n- Amount: ₹${$node['Merge Real Data + Classification'].json.webhookData.amountLost}\\n- Payment: ${$node['Merge Real Data + Classification'].json.webhookData.paymentPlatform}\\n- Time: ${$node['Merge Real Data + Classification'].json.webhookData.incidentTime}\\n\\nREAL HELPLINE DATA (USE THESE EXACT NUMBERS AND URLs):\\n${JSON.stringify($node['Merge Real Data + Classification'].json.relevantHelplines, null, 2)}\\n\\nProvide:\\n1. A COMPLETE FIR complaint draft with placeholders like [Your Full Name]. Reference IT Act sections.\\n2. A 3-phase action plan. In the steps, use the REAL phone numbers and URLs from the helpline data above.\\n\\nRespond with JSON:\\n{\\n  \"complaintDraft\": \"Full complaint text with \\\\n for line breaks\",\\n  \"actionPlan\": [\\n    {\\n      \"timeframe\": \"30min\",\\n      \"label\": \"Right Now\",\\n      \"description\": \"Why these steps matter\",\\n      \"steps\": [\"step with REAL phone number\", \"step with REAL URL\"],\\n      \"done\": false\\n    },\\n    {\\n      \"timeframe\": \"2hr\",\\n      \"label\": \"Within 2 Hours\",\\n      \"description\": \"Why these steps matter\",\\n      \"steps\": [\"step 1\", \"step 2\", \"step 3\", \"step 4\"],\\n      \"done\": false\\n    },\\n    {\\n      \"timeframe\": \"24hr\",\\n      \"label\": \"By Tomorrow\",\\n      \"description\": \"Why these steps matter\",\\n      \"steps\": [\"step 1\", \"step 2\", \"step 3\", \"step 4\"],\\n      \"done\": false\\n    }\\n  ]\\n}` }], temperature: 0.3, max_tokens: 1500 }) }}",
+        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are writing a complaint and action plan for a cybercrime victim in India. Write as if guiding a close friend. Use the REAL helpline numbers and URLs provided â€” do NOT make up any phone numbers or URLs. Always respond with ONLY valid JSON, no markdown, no code fences.' }, { role: 'user', content: `Victim details:\\n- Description: ${$node['Merge Real Data + Classification'].json.webhookData.description}\\n- Amount: â‚¹${$node['Merge Real Data + Classification'].json.webhookData.amountLost}\\n- Payment: ${$node['Merge Real Data + Classification'].json.webhookData.paymentPlatform}\\n- Time: ${$node['Merge Real Data + Classification'].json.webhookData.incidentTime}\\n\\nREAL HELPLINE DATA (USE THESE EXACT NUMBERS AND URLs):\\n${JSON.stringify($node['Merge Real Data + Classification'].json.relevantHelplines, null, 2)}\\n\\nProvide:\\n1. A COMPLETE FIR complaint draft with placeholders like [Your Full Name]. Reference IT Act sections.\\n2. A 3-phase action plan. In the steps, use the REAL phone numbers and URLs from the helpline data above.\\n\\nRespond with JSON:\\n{\\n  \"complaintDraft\": \"Full complaint text with \\\\n for line breaks\",\\n  \"actionPlan\": [\\n    {\\n      \"timeframe\": \"30min\",\\n      \"label\": \"Right Now\",\\n      \"description\": \"Why these steps matter\",\\n      \"steps\": [\"step with REAL phone number\", \"step with REAL URL\"],\\n      \"done\": false\\n    },\\n    {\\n      \"timeframe\": \"2hr\",\\n      \"label\": \"Within 2 Hours\",\\n      \"description\": \"Why these steps matter\",\\n      \"steps\": [\"step 1\", \"step 2\", \"step 3\", \"step 4\"],\\n      \"done\": false\\n    },\\n    {\\n      \"timeframe\": \"24hr\",\\n      \"label\": \"By Tomorrow\",\\n      \"description\": \"Why these steps matter\",\\n      \"steps\": [\"step 1\", \"step 2\", \"step 3\", \"step 4\"],\\n      \"done\": false\\n    }\\n  ]\\n}` }], temperature: 0.3, max_tokens: 1500 }) }}",
         "options": {}
       },
       "id": "complaint-draft",
@@ -289,7 +289,7 @@
       "parameters": {
         "sendTo": "fraud_desk@dummybank.com",
         "subject": "={{ 'URGENT: Fraudulent Transaction Freeze Request - ' + $json.webhookData.paymentPlatform }}",
-        "message": "={{ 'Dear Fraud Desk,\\n\\nA fraudulent transaction has been reported on platform ' + $json.webhookData.paymentPlatform + '.\\n\\nAmount: ₹' + $json.webhookData.amountLost + '\\nIncident Time: ' + $json.webhookData.incidentTime + '\\n\\nPlease freeze these funds immediately as per RBI guidelines.\\n\\nDescription:\\n' + $json.webhookData.description + '\\n\\nRegards,\\nFirstHour Automated System' }}",
+        "message": "={{ 'Dear Fraud Desk,\\n\\nA fraudulent transaction has been reported on platform ' + $json.webhookData.paymentPlatform + '.\\n\\nAmount: â‚¹' + $json.webhookData.amountLost + '\\nIncident Time: ' + $json.webhookData.incidentTime + '\\n\\nPlease freeze these funds immediately as per RBI guidelines.\\n\\nDescription:\\n' + $json.webhookData.description + '\\n\\nRegards,\\nFirstHour Automated System' }}",
         "appendAttribution": false
       },
       "id": "email-bank",
@@ -409,7 +409,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+              "value": "Bearer dummy"
             },
             {
               "name": "Content-Type",
