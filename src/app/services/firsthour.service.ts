@@ -173,9 +173,9 @@ I, [Your Full Name], resident of [Your Address], would like to report a case of 
 
 Details of the incident:
 ${report.description}
-
+${report.amountLost ? `
 The fraudulent transaction was made through ${report.paymentPlatform} for an amount of ₹${report.amountLost.toLocaleString('en-IN')}.
-
+` : ''}
 I have preserved all relevant evidence including transaction screenshots, communication records with the fraudster, and bank statements.
 
 I request you to kindly register an FIR under the relevant sections of the Information Technology Act, 2000 (Sections 66C, 66D) and the Indian Penal Code (Section 420 — Cheating), and investigate this matter at the earliest.

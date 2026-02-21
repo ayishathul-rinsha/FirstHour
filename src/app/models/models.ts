@@ -1,8 +1,9 @@
 export interface IncidentReport {
+  incidentType: string;
   description: string;
-  amountLost: number;
+  amountLost?: number;
   incidentTime: string;
-  paymentPlatform: string;
+  paymentPlatform?: string;
 }
 
 export interface EvidenceItem {
@@ -56,8 +57,8 @@ export interface FollowUpRequest {
   completedSteps: string[];
   currentPhase: string;
   crimeType: string;
-  paymentPlatform: string;
-  amountLost: number;
+  paymentPlatform?: string;
+  amountLost?: number;
   incidentTime: string;
   userMessage: string;
 }

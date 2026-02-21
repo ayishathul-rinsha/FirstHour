@@ -1,12 +1,15 @@
 <section class="form-section">
   <div class="hero-card">
     <div class="hero-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="48" height="48">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round" width="48" height="48">
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
       </svg>
     </div>
     <h1 class="hero-title">Take a deep breath. You're safe here.</h1>
-    <p class="hero-subtitle">You're doing the right thing by acting quickly. Tell us what happened — we'll prepare a personalised action plan to help you.</p>
+    <p class="hero-subtitle">You're doing the right thing by acting quickly. Tell us what happened — we'll prepare a
+      personalised action plan to help you.</p>
   </div>
 
   <!-- Loading Overlay -->
@@ -21,15 +24,25 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="incident-form" *ngIf="!isSubmitting">
 
     <div class="form-group">
+      <label for="incidentType" class="form-label">What best describes the incident?</label>
+      <select id="incidentType" formControlName="incidentType" class="form-control">
+        <option value="" disabled>Select category</option>
+        <option *ngFor="let type of incidentTypes" [value]="type">
+          {{ type }}
+        </option>
+      </select>
+      <p class="form-error" *ngIf="form.get('incidentType')?.touched && form.get('incidentType')?.invalid">
+        Please select the type of incident so we can tailor your action plan.
+      </p>
+    </div>
+
+    <div class="form-group">
       <label for="description" class="form-label">In your own words, what happened?</label>
-      <p class="form-hint">Don't worry about getting everything perfect — just describe what you remember. Every detail helps.</p>
-      <textarea
-        id="description"
-        formControlName="description"
-        rows="5"
+      <p class="form-hint">Don't worry about getting everything perfect — just describe what you remember. Every detail
+        helps.</p>
+      <textarea id="description" formControlName="description" rows="5"
         placeholder="For example: I received a call from someone claiming to be from my bank. They asked me to scan a QR code and enter my UPI PIN…"
-        class="form-control"
-      ></textarea>
+        class="form-control"></textarea>
       <p class="form-error" *ngIf="form.get('description')?.touched && form.get('description')?.hasError('required')">
         Please describe what happened so we can help you better.
       </p>
@@ -39,17 +52,11 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group">
+      <div class="form-group" *ngIf="isFinancialFraud">
         <label for="amountLost" class="form-label">How much money was involved? (₹)</label>
         <p class="form-hint">An approximate amount is fine.</p>
-        <input
-          id="amountLost"
-          type="number"
-          formControlName="amountLost"
-          placeholder="e.g. 15000"
-          class="form-control"
-          min="1"
-        />
+        <input id="amountLost" type="number" formControlName="amountLost" placeholder="e.g. 15000" class="form-control"
+          min="1" />
         <p class="form-error" *ngIf="form.get('amountLost')?.touched && form.get('amountLost')?.invalid">
           Please enter the approximate amount.
         </p>
@@ -58,27 +65,18 @@
       <div class="form-group">
         <label for="incidentTime" class="form-label">When did this happen?</label>
         <p class="form-hint">This helps us calculate your recovery window.</p>
-        <input
-          id="incidentTime"
-          type="datetime-local"
-          formControlName="incidentTime"
-          class="form-control"
-          [max]="getMaxDateTime()"
-        />
+        <input id="incidentTime" type="datetime-local" formControlName="incidentTime" class="form-control"
+          [max]="getMaxDateTime()" />
         <p class="form-error" *ngIf="form.get('incidentTime')?.touched && form.get('incidentTime')?.invalid">
           Knowing when it happened helps us prioritise the right steps.
         </p>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" *ngIf="isFinancialFraud">
       <label for="paymentPlatform" class="form-label">Which payment method was used?</label>
       <p class="form-hint">This helps us tailor your complaint to the right authority.</p>
-      <select
-        id="paymentPlatform"
-        formControlName="paymentPlatform"
-        class="form-control"
-      >
+      <select id="paymentPlatform" formControlName="paymentPlatform" class="form-control">
         <option value="" disabled>Select payment method</option>
         <option *ngFor="let platform of paymentPlatforms" [value]="platform">
           {{ platform }}
@@ -90,15 +88,18 @@
     </div>
 
     <button type="submit" class="submit-btn" [disabled]="isSubmitting">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
       Get My Action Plan
     </button>
 
     <p class="privacy-note">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        width="14" height="14">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
       </svg>
       Your information is private and secure. We only use it to generate your action plan.
     </p>

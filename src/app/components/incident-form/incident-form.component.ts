@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { IncidentReport } from '../../models/models';
     templateUrl: './incident-form.component.html',
     styleUrls: ['./incident-form.component.css']
 })
-export class IncidentFormComponent {
+export class IncidentFormComponent implements OnInit {
     form: FormGroup;
     isSubmitting = false;
     loadingMessage = '';
@@ -22,6 +22,15 @@ export class IncidentFormComponent {
         'Looking up the relevant laws that protect you…',
         'Preparing your personalised action plan…',
         'Almost ready — putting together your report…'
+    ];
+
+    readonly incidentTypes = [
+        'Financial Fraud (UPI, Credit Card, Bank, etc.)',
+        'Cyberbullying / Online Harassment',
+        'Morphing / Sextortion',
+        'Identity Theft / Fake Profile',
+        'Hacking / Account Compromise',
+        'Other Cybercrime'
     ];
 
     readonly paymentPlatforms = [
@@ -39,10 +48,32 @@ export class IncidentFormComponent {
         private router: Router
     ) {
         this.form = this.fb.group({
+            incidentType: ['', Validators.required],
             description: ['', [Validators.required, Validators.minLength(20)]],
-            amountLost: [null, [Validators.required, Validators.min(1)]],
+            amountLost: [null],
             incidentTime: ['', Validators.required],
-            paymentPlatform: ['', Validators.required]
+            paymentPlatform: ['']
+        });
+    }
+
+    ngOnInit(): void {
+        // Watch incidentType to conditionally require financial fields
+        this.form.get('incidentType')?.valueChanges.subscribe(type => {
+            const amountCtrl = this.form.get('amountLost');
+            const platformCtrl = this.form.get('paymentPlatform');
+
+            if (type === 'Financial Fraud (UPI, Credit Card, Bank, etc.)') {
+                amountCtrl?.setValidators([Validators.required, Validators.min(1)]);
+                platformCtrl?.setValidators([Validators.required]);
+            } else {
+                amountCtrl?.clearValidators();
+                amountCtrl?.setValue(null);
+                platformCtrl?.clearValidators();
+                platformCtrl?.setValue('');
+            }
+
+            amountCtrl?.updateValueAndValidity();
+            platformCtrl?.updateValueAndValidity();
         });
     }
 
@@ -84,4 +115,9 @@ export class IncidentFormComponent {
     getMaxDateTime(): string {
         return new Date().toISOString().slice(0, 16);
     }
+
+    get isFinancialFraud(): boolean {
+        return this.form.get('incidentType')?.value === 'Financial Fraud (UPI, Credit Card, Bank, etc.)';
+    }
 }
+
