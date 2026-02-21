@@ -1,27 +1,87 @@
-# FirstHour
+# FirstHour - Cybercrime Recovery Assistant
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+FirstHour is a serverless, AI-powered web application designed to help victims of financial cybercrimes in India take immediate, critical action within the crucial "golden hour" of the incident. It uses advanced language models to analyze the victim's situation, determine the appropriate legal framework, identify the exact bank nodal officer helplines, and instantly generate a completely customized First Information Report (FIR) ready for police submission.
 
-## Development server
+## Tech Stack
+- **Frontend Framework:** Angular 19 (TypeScript, HTML, CSS)
+- **AI Integration:** Groq API (Llama-3.3-70b-versatile model)
+- **Data Parsing:** PapaParse (for client-side CSV processing)
+- **PDF Generation:** jsPDF & html2canvas (for immutable case logs)
+- **Hosting/Deployment:** Vercel / Firebase Hosting (Serverless SPA)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Key Features
+1. **Zero-Shot AI Analysis:** Instantly classifies the cybercrime and generates an empathetic, custom response using the Groq API.
+2. **Dynamic Helpline Resolution:** Natively parses a local offline database (`helplines.csv`) to match the victim's payment platform to the exact bank Nodal Officer email and fraud helpline.
+3. **Automated Legal Drafting:** Automatically generates a comprehensive, legally accurate FIR draft referencing specific sections of the Indian IT Act 2000 based on the incident context.
+4. **Secure Offline PDF Export:** Generates an immutable, high-resolution PDF of the entire customized dashboard so victims can print it and physically take it to the cyber police.
+5. **Interactive Checklists & Timelines:** Provides an action-oriented timeline customized to the time elapsed since the crime, and a checklist of digital evidence to preserve.
+6. **100% Serverless Architecture:** Completely decoupled from any backend database or webhook requirements, ensuring infinite scalability and absolute privacy.
 
-## Code scaffolding
+## Installation Commands
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone the repository:
+   \`\`\`bash
+   git clone https://github.com/your-username/FirstHour.git
+   cd FirstHour
+   \`\`\`
+2. Install dependencies:
+   \`\`\`bash
+   npm install
+   \`\`\`
+3. Configure the environment variables:
+   - Open `src/environments/environment.ts`
+   - Add your Groq API Key to the `groqApiKey` property:
+     \`\`\`typescript
+     export const environment = {
+         production: false,
+         n8nWebhookUrl: '/webhook/firsthour',
+         groqApiKey: 'gsk_YOUR_GROQ_API_KEY_HERE',
+         useMockData: false
+     };
+     \`\`\`
 
-## Build
+## Run Commands
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To start the local development server:
+\`\`\`bash
+npm start
+\`\`\`
+Navigate to \`http://localhost:4200/\` to view the application.
 
-## Running unit tests
+To build for production:
+\`\`\`bash
+npm run build
+\`\`\`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Screenshots
+*(Replace with actual image links once hosted)*
+1. ![Landing Page](docs/screenshot1.png) - Incident Reporting Form
+2. ![Results Dashboard](docs/screenshot2.png) - AI Generated Action Plan & FIR
+3. ![Helpline UI](docs/screenshot3.png) - Dynamically Resolved Bank Helplines
 
-## Running end-to-end tests
+## Demo Video
+*(Replace with actual YouTube/Loom link)*
+[Watch the Demo Video Here](https://youtube.com/your-video-link)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Architecture Diagram
 
-## Further help
+\`\`\`mermaid
+graph TD
+    A[Victim Submits Form] -->|Angular App| B(FirsthourService)
+    B -->|Concurrent Request 1| C{Groq API / Llama 3}
+    B -->|Concurrent Request 2| D[(Local helplines.csv)]
+    D -->|PapaParse| E[Offline Parsing]
+    C -->|Generate FIR & Steps| F(Merge Data)
+    E -->|Extract Nodal Officer| F
+    F -->|Render| G[Dashboard Component]
+    G -->|html2canvas + jsPDF| H[Download PDF Case Logs]
+\`\`\`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## API Documentation
+Because FirstHour operates on a **100% Serverless SPA Architecture**, there is no proprietary backend API to document. The application communicates directly from the client browser to the Groq API inference endpoints.
+
+## Team Members
+- [Your Name / Username] - Lead Developer
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
