@@ -53,6 +53,17 @@ To build for production:
 npm run build
 \`\`\`
 
+## Secure Deployment (Vercel)
+
+This project uses a **Serverless API Proxy** to protect your Groq API Key. This ensures your key is never exposed on GitHub or in the user's browser.
+
+1. **Deploy to Vercel:** Push your code to GitHub and connect the repository to Vercel.
+2. **Configure Environment Variables:**
+   - Go to your Project Settings on Vercel.
+   - Navigate to **Environment Variables**.
+   - Add a new variable with the key \`GROQ_API_KEY\` and your secret \`gsk_...\` as the value.
+3. **Automatic Protection:** The app will automatically detect if the key is missing in the browser and use the secure \`/api/chat\` backend bridge instead.
+
 ## Screenshots
 *(Replace with actual image links once hosted)*
 1. ![Landing Page](docs/screenshot1.png) - Incident Reporting Form

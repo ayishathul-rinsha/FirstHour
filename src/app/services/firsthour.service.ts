@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, delay, forkJoin } from 'rxjs';
+import { Observable, of, delay, forkJoin, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { IncidentReport, CaseResult, FollowUpRequest, FollowUpResponse, Helpline } from '../models/models';
 import { environment } from '../../environments/environment';
@@ -86,10 +86,13 @@ Use this EXACT schema:
 }
         `;
 
-        const headers = {
-            'Authorization': 'Bearer ' + apiKey,
-            'Content-Type': 'application/json'
-        };
+        const useProxy = !apiKey;
+        const url = useProxy ? '/api/chat' : 'https://api.groq.com/openai/v1/chat/completions';
+
+        const headers: any = { 'Content-Type': 'application/json' };
+        if (!useProxy) {
+            headers['Authorization'] = 'Bearer ' + apiKey;
+        }
 
         const body = {
             model: 'llama-3.3-70b-versatile',
@@ -99,10 +102,25 @@ Use this EXACT schema:
             response_format: { type: "json_object" }
         };
 
-        const aiCall$ = this.http.post<any>('https://api.groq.com/openai/v1/chat/completions', body, { headers }).pipe(
+        const aiCall$ = this.http.post<any>(url, body, { headers }).pipe(
             map(response => {
-                const content = response.choices[0].message.content;
-                return JSON.parse(content) as CaseResult;
+                // The Groq API response structure via proxy
+                if (response.choices && response.choices.length > 0) {
+                    const content = response.choices[0].message.content;
+                    return JSON.parse(content) as CaseResult;
+                }
+
+                // If the proxy returns an error directly
+                if (response.error) {
+                    throw new Error(response.error + (response.instruction ? '. ' + response.instruction : ''));
+                }
+
+                throw new Error('Malformed AI response. Please check Vercel logs.');
+            }),
+            catchError(err => {
+                console.error('AI Proxy Error:', err);
+                // On error, we still need to return a valid CaseResult (empty or mock) to prevent UI crash
+                return throwError(() => err);
             })
         );
 
@@ -180,7 +198,14 @@ Acknowledge their progress and tell them exactly what to do next.Output STRICT J
             Schema: { "message": "Encouraging text", "nextSteps": ["step 1", "step 2"], "encouragement": "Short sign off" }
         `;
 
-        const headers = { 'Authorization': 'Bearer ' + apiKey, 'Content-Type': 'application/json' };
+        const useProxy = !apiKey;
+        const url = useProxy ? '/api/chat' : 'https://api.groq.com/openai/v1/chat/completions';
+
+        const headers: any = { 'Content-Type': 'application/json' };
+        if (!useProxy) {
+            headers['Authorization'] = 'Bearer ' + apiKey;
+        }
+
         const body = {
             model: 'llama-3.3-70b-versatile',
             messages: [{ role: 'user', content: prompt }],
@@ -189,9 +214,23 @@ Acknowledge their progress and tell them exactly what to do next.Output STRICT J
             response_format: { type: "json_object" }
         };
 
-        return this.http.post<any>('https://api.groq.com/openai/v1/chat/completions', body, { headers }).pipe(
-            map(response => JSON.parse(response.choices[0].message.content) as FollowUpResponse),
-            catchError(() => of((this as any).getMockFollowUp(request)))
+        return this.http.post<any>(url, body, { headers }).pipe(
+            map(response => {
+                if (response.choices && response.choices.length > 0) {
+                    const content = response.choices[0].message.content;
+                    return JSON.parse(content) as FollowUpResponse;
+                }
+
+                if (response.error) {
+                    throw new Error(response.error);
+                }
+
+                throw new Error('Malformed Followup response');
+            }),
+            catchError(err => {
+                console.error('Followup Proxy Error:', err);
+                return of((this as any).getMockFollowUp(request));
+            })
         );
     }
 
