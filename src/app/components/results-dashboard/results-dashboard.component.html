@@ -1,0 +1,309 @@
+<section class="dashboard" *ngIf="result">
+
+    <!-- Top Banner -->
+    <div class="banner">
+        <div class="banner-icon">✓</div>
+        <h1 class="banner-title">Your personalised action plan is ready</h1>
+        <p class="banner-subtitle">You've already taken the most important step. Here's everything you need to move
+            forward.</p>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <!-- 1. What Likely Happened -->
+        <div class="card card-what-happened">
+            <div class="card-header">
+                <span class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" width="22" height="22">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                </span>
+                <h2 class="card-title">What likely happened</h2>
+            </div>
+            <div class="crime-badge">{{ result.whatHappened.crimeType }}</div>
+            <p class="card-text">{{ result.whatHappened.summary }}</p>
+            <div class="reassurance-box">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.5" width="18" height="18">
+                    <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                <p>{{ result.whatHappened.reassurance }}</p>
+            </div>
+        </div>
+
+        <!-- 2. Recovery Window + Countdown -->
+        <div class="card card-recovery">
+            <div class="card-header">
+                <span class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" width="22" height="22">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </span>
+                <h2 class="card-title">Your recovery window</h2>
+            </div>
+            <div class="recovery-visual">
+                <div class="recovery-ring" [style.background]="getRecoveryGradient()">
+                    <div class="recovery-ring-inner">
+                        <span class="recovery-pct" [style.color]="getRecoveryColor()">{{
+                            result.recoveryWindow.percentage }}%</span>
+                        <span class="recovery-label">chance</span>
+                    </div>
+                </div>
+                <div class="recovery-info">
+                    <p class="recovery-message">{{ result.recoveryWindow.message }}</p>
+                    <p class="recovery-encourage">{{ result.recoveryWindow.encouragement }}</p>
+                </div>
+            </div>
+            <div class="countdown-section">
+                <p class="countdown-label">{{ countdownLabel }}</p>
+                <div class="countdown-timer">
+                    <div class="countdown-unit">
+                        <span class="countdown-value">{{ countdownHours | number:'2.0-0' }}</span>
+                        <span class="countdown-unit-label">hrs</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span class="countdown-value">{{ countdownMinutes | number:'2.0-0' }}</span>
+                        <span class="countdown-unit-label">min</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span class="countdown-value">{{ countdownSeconds | number:'2.0-0' }}</span>
+                        <span class="countdown-unit-label">sec</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Evidence Checklist -->
+        <div class="card card-evidence">
+            <div class="card-header">
+                <span class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" width="22" height="22">
+                        <path d="M9 11l3 3L22 4" />
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                    </svg>
+                </span>
+                <h2 class="card-title">Things that will help your case</h2>
+            </div>
+            <p class="card-subtitle-soft">Each item you check strengthens your case</p>
+            <div class="progress-bar-container">
+                <div class="progress-bar" [style.width.%]="(checkedCount / result.evidenceChecklist.length) * 100">
+                </div>
+            </div>
+            <p class="progress-text">{{ checkedCount }} of {{ result.evidenceChecklist.length }} completed</p>
+            <ul class="evidence-list">
+                <li *ngFor="let item of result.evidenceChecklist" class="evidence-item" [class.checked]="item.checked"
+                    (click)="toggleEvidence(item)">
+                    <span class="checkbox" [class.checked]="item.checked">
+                        <svg *ngIf="item.checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="3" width="14" height="14">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </span>
+                    <span class="evidence-text">{{ item.text }}</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 4. Your Legal Protections -->
+        <div class="card card-legal">
+            <div class="card-header">
+                <span class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" width="22" height="22">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                </span>
+                <h2 class="card-title">The law is on your side</h2>
+            </div>
+            <p class="card-subtitle-soft">Here's how the law protects you in this situation</p>
+            <div class="legal-list">
+                <div *ngFor="let law of result.legalProtections; let i = index" class="legal-item"
+                    [class.expanded]="expandedLegal === i" (click)="toggleLegal(i)">
+                    <div class="legal-header">
+                        <div>
+                            <h3 class="legal-title">{{ law.title }}</h3>
+                            <p class="legal-section">{{ law.section }}</p>
+                        </div>
+                        <span class="legal-chevron" [class.expanded]="expandedLegal === i">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" width="18" height="18">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="legal-body" *ngIf="expandedLegal === i">
+                        <p class="legal-explanation">{{ law.explanation }}</p>
+                        <div class="legal-helps">
+                            <strong>How this helps you:</strong>
+                            <p>{{ law.howItHelps }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Step-by-Step Guide -->
+        <div class="card card-actions card-full-width">
+            <div class="card-header">
+                <span class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" width="22" height="22">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                </span>
+                <h2 class="card-title">Your step-by-step guide</h2>
+            </div>
+            <div class="timeline">
+                <div *ngFor="let step of result.actionPlan; let i = index" class="timeline-item"
+                    [class.done]="step.done">
+                    <div class="timeline-marker" (click)="toggleActionDone(step)">
+                        <span class="timeline-dot" [class.done]="step.done">
+                            <svg *ngIf="step.done" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3" width="14" height="14">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </span>
+                        <div class="timeline-line" *ngIf="i < result.actionPlan.length - 1"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-badge" [attr.data-timeframe]="step.timeframe">{{ step.label }}</div>
+                        <p class="timeline-desc">{{ step.description }}</p>
+                        <ul class="timeline-steps">
+                            <li *ngFor="let s of step.steps">{{ s }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Ready-to-use Report -->
+        <div class="card card-complaint card-full-width">
+            <div class="card-header">
+                <span class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" width="22" height="22">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                    </svg>
+                </span>
+                <h2 class="card-title">Your ready-to-use report</h2>
+            </div>
+            <p class="card-subtitle-soft">This complaint is ready to submit. Just fill in your personal details and copy
+                it.</p>
+            <div class="complaint-box">
+                <pre class="complaint-text">{{ result.complaintDraft }}</pre>
+            </div>
+            <button class="copy-btn" (click)="copyComplaint()">
+                <svg *ngIf="!copied" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                <svg *ngIf="copied" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                {{ copied ? 'Copied!' : 'Copy to Clipboard' }}
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Helpline Footer -->
+    <div class="helpline-footer">
+        <h3 class="helpline-title">Important helpline numbers</h3>
+        <div class="helpline-grid">
+            <div class="helpline-item">
+                <span class="helpline-number">1930</span>
+                <span class="helpline-label">National Cybercrime Helpline</span>
+            </div>
+            <div class="helpline-item">
+                <span class="helpline-number">cybercrime.gov.in</span>
+                <span class="helpline-label">Online Complaint Portal</span>
+            </div>
+            <div class="helpline-item">
+                <span class="helpline-number">100</span>
+                <span class="helpline-label">Police Emergency</span>
+            </div>
+        </div>
+        <p class="helpline-reminder">Remember: <strong>You are not at fault.</strong> Cybercrime can happen to anyone.
+            What matters is what you do next &mdash; and you're doing it.</p>
+        <button class="new-case-btn" (click)="startNewCase()">Help Someone Else</button>
+    </div>
+
+    <!-- Follow-Up Assistant FAB -->
+    <button class="fab-followup" (click)="openFollowUp()" *ngIf="!showFollowUp" title="Need help with next steps?">
+        <span class="fab-icon">💬</span>
+        <span class="fab-label">What should I do next?</span>
+    </button>
+
+    <!-- Follow-Up Chat Panel -->
+    <div class="followup-panel" *ngIf="showFollowUp" [class.open]="showFollowUp">
+        <div class="followup-header">
+            <div class="followup-header-info">
+                <span class="followup-avatar">🛡️</span>
+                <div>
+                    <h3 class="followup-title">FirstHour Guide</h3>
+                    <p class="followup-status">Here to help you through each step</p>
+                </div>
+            </div>
+            <button class="followup-close" (click)="closeFollowUp()">&times;</button>
+        </div>
+
+        <div class="followup-messages">
+            <div *ngFor="let msg of followUpMessages" class="followup-msg" [class.user]="msg.role === 'user'"
+                [class.assistant]="msg.role === 'assistant'">
+                <div class="followup-msg-bubble">
+                    <p>{{ msg.text }}</p>
+                </div>
+                <span class="followup-msg-time">
+                    {{ msg.timestamp | date:'h:mm a' }}
+                </span>
+            </div>
+            <div *ngIf="followUpLoading" class="followup-msg assistant">
+                <div class="followup-msg-bubble typing">
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Action Buttons -->
+        <div class="followup-quick-actions">
+            <button *ngFor="let action of quickActions" class="quick-action-btn" (click)="sendQuickAction(action)"
+                [disabled]="followUpLoading">
+                <span class="quick-action-icon">{{ action.icon }}</span>
+                {{ action.label }}
+            </button>
+        </div>
+
+        <!-- Free Text Input -->
+        <div class="followup-input-bar">
+            <input type="text" class="followup-input" [(ngModel)]="followUpInput"
+                placeholder="Type what you've done or ask a question..." (keydown.enter)="sendFollowUp()"
+                [disabled]="followUpLoading" />
+            <button class="followup-send" (click)="sendFollowUp()"
+                [disabled]="followUpLoading || !followUpInput.trim()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" width="20" height="20">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,647 @@
+{
+  "name": "FirstHour - Cybercrime Response Pipeline (Groq + Real Data)",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "firsthour",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Helplines",
+          "mode": "list"
+        },
+        "options": {}
+      },
+      "id": "fetch-helpline-data",
+      "name": "Fetch Helpline Database",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        440,
+        440
+      ],
+      "notes": "Reads the maintained helpline/chargeback database from Google Sheets. This is REAL data the AI cannot know — numbers, URLs, and windows that change over time."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are a compassionate cybercrime advisor in India. Always respond with ONLY valid JSON, no markdown, no code fences.' }, { role: 'user', content: `Classify the following incident into one of these categories: UPI Fraud, Digital Arrest Scam, Phishing, Investment Fraud, Job Fraud, Loan App Harassment, Sextortion, Identity Theft, or Other Cybercrime.\\n\\nIncident description: ${$json.body.description}\\nPayment platform: ${$json.body.paymentPlatform}\\nAmount: ₹${$json.body.amountLost}\\n\\nRespond with JSON:\\n{\\n  \"crimeType\": \"category name\",\\n  \"summary\": \"A 2-3 sentence explanation in simple, non-frightening terms. Start with 'Based on what you described...' Mention this is common and they are not alone.\",\\n  \"reassurance\": \"A comforting sentence about acting quickly and recovering.\"\\n}` }], temperature: 0.3, max_tokens: 500 }) }}",
+        "options": {}
+      },
+      "id": "classify-crime",
+      "name": "1. Understand - Classify Crime",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Merge the classification result with the helpline database\nconst classification = $('1. Understand - Classify Crime').first().json;\nconst helplines = $('Fetch Helpline Database').all().map(item => item.json);\nconst webhookData = $('Webhook Trigger').first().json.body;\n\n// Find matching platform helpline\nconst platform = webhookData.paymentPlatform || '';\nconst matchedHelplines = helplines.filter(h => {\n  const bankName = (h['Bank/Platform'] || '').toLowerCase();\n  const platLower = platform.toLowerCase();\n  return platLower.includes(bankName) || bankName.includes(platLower.split(' ')[0]);\n});\n\n// Always include national helplines\nconst nationalHelplines = helplines.filter(h => {\n  const name = (h['Bank/Platform'] || '').toLowerCase();\n  return name.includes('national') || name.includes('rbi') || name.includes('police') || name.includes('women');\n});\n\nconst relevantHelplines = [...matchedHelplines, ...nationalHelplines];\nconst chargebackWindow = matchedHelplines.length > 0 ? matchedHelplines[0]['Chargeback Window (Hours)'] : '72';\n\nreturn [{\n  json: {\n    classification,\n    webhookData,\n    relevantHelplines,\n    chargebackWindow,\n    allHelplines: helplines\n  }\n}];"
+      },
+      "id": "merge-data",
+      "name": "Merge Real Data + Classification",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        300
+      ],
+      "notes": "Matches the victim's payment platform against the helpline database to find relevant phone numbers, URLs, and chargeback windows. This is the KEY node that makes the pipeline more than just prompting."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are a helpful cybercrime evidence advisor. Frame each item as a helpful step, not a demand. Use friendly language. Always respond with ONLY valid JSON, no markdown, no code fences.' }, { role: 'user', content: `Generate an evidence checklist for a victim of: ${$json.classification.choices[0].message.content}\\n\\nPayment platform used: ${$json.webhookData.paymentPlatform}\\n\\nRespond with a JSON array:\\n[\\n  { \"id\": 1, \"text\": \"friendly instruction\", \"checked\": false }\\n]\\n\\nGenerate 5-7 items specific to this crime type and payment platform.` }], temperature: 0.3, max_tokens: 600 }) }}",
+        "options": {}
+      },
+      "id": "evidence-checklist",
+      "name": "2. Gather - Evidence Checklist",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are a compassionate Indian cybercrime legal advisor with deep knowledge of the Information Technology Act 2000, Bharatiya Nyaya Sanhita 2023, and RBI circulars. Frame everything as the law PROTECTS the victim. Use plain English. Always respond with ONLY valid JSON, no markdown, no code fences.' }, { role: 'user', content: `The victim experienced: ${$node['Merge Real Data + Classification'].json.classification.choices[0].message.content}\\n\\nREAL DATA - Their bank/platform chargeback window is ${$node['Merge Real Data + Classification'].json.chargebackWindow} hours. Use this ACTUAL number in your explanation.\\n\\nExplain the legal protections available. Include relevant IT Act 2000 sections, IPC/BNS sections, and the RBI circular on limiting customer liability (RBI/2017-18/15).\\n\\nRespond with JSON array:\\n[\\n  {\\n    \"title\": \"Friendly title\",\\n    \"section\": \"Section reference\",\\n    \"explanation\": \"Plain English explanation\",\\n    \"howItHelps\": \"How this protects the victim, referencing the actual ${$node['Merge Real Data + Classification'].json.chargebackWindow}-hour chargeback window\"\\n  }\\n]\\n\\nProvide 2-4 most relevant protections.` }], temperature: 0.3, max_tokens: 800 }) }}",
+        "options": {}
+      },
+      "id": "legal-interpretation",
+      "name": "3. Protect - Legal Interpretation",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are a recovery advisor for cybercrime victims in India. ALWAYS lead with what CAN be done. Never be discouraging. Always respond with ONLY valid JSON, no markdown, no code fences.' }, { role: 'user', content: `Calculate recovery probability using this REAL chargeback data:\\n\\n- Incident time: ${$node['Merge Real Data + Classification'].json.webhookData.incidentTime}\\n- Current time: ${new Date().toISOString()}\\n- Payment platform: ${$node['Merge Real Data + Classification'].json.webhookData.paymentPlatform}\\n- Amount: ₹${$node['Merge Real Data + Classification'].json.webhookData.amountLost}\\n- ACTUAL chargeback window for this platform: ${$node['Merge Real Data + Classification'].json.chargebackWindow} hours\\n\\nUse the ACTUAL chargeback window above (not generic data) to calculate how much time the victim has left.\\n\\nRespond with JSON:\\n{\\n  \"percentage\": number between 15-90,\\n  \"message\": \"Hopeful message referencing the actual ${$node['Merge Real Data + Classification'].json.chargebackWindow}-hour window\",\\n  \"hoursRemaining\": number based on actual window,\\n  \"encouragement\": \"A short encouraging sentence\"\\n}` }], temperature: 0.3, max_tokens: 400 }) }}",
+        "options": {}
+      },
+      "id": "recovery-probability",
+      "name": "4. Empower - Recovery Probability",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are writing a complaint and action plan for a cybercrime victim in India. Write as if guiding a close friend. Use the REAL helpline numbers and URLs provided — do NOT make up any phone numbers or URLs. Always respond with ONLY valid JSON, no markdown, no code fences.' }, { role: 'user', content: `Victim details:\\n- Description: ${$node['Merge Real Data + Classification'].json.webhookData.description}\\n- Amount: ₹${$node['Merge Real Data + Classification'].json.webhookData.amountLost}\\n- Payment: ${$node['Merge Real Data + Classification'].json.webhookData.paymentPlatform}\\n- Time: ${$node['Merge Real Data + Classification'].json.webhookData.incidentTime}\\n\\nREAL HELPLINE DATA (USE THESE EXACT NUMBERS AND URLs):\\n${JSON.stringify($node['Merge Real Data + Classification'].json.relevantHelplines, null, 2)}\\n\\nProvide:\\n1. A COMPLETE FIR complaint draft with placeholders like [Your Full Name]. Reference IT Act sections.\\n2. A 3-phase action plan. In the steps, use the REAL phone numbers and URLs from the helpline data above.\\n\\nRespond with JSON:\\n{\\n  \"complaintDraft\": \"Full complaint text with \\\\n for line breaks\",\\n  \"actionPlan\": [\\n    {\\n      \"timeframe\": \"30min\",\\n      \"label\": \"Right Now\",\\n      \"description\": \"Why these steps matter\",\\n      \"steps\": [\"step with REAL phone number\", \"step with REAL URL\"],\\n      \"done\": false\\n    },\\n    {\\n      \"timeframe\": \"2hr\",\\n      \"label\": \"Within 2 Hours\",\\n      \"description\": \"Why these steps matter\",\\n      \"steps\": [\"step 1\", \"step 2\", \"step 3\", \"step 4\"],\\n      \"done\": false\\n    },\\n    {\\n      \"timeframe\": \"24hr\",\\n      \"label\": \"By Tomorrow\",\\n      \"description\": \"Why these steps matter\",\\n      \"steps\": [\"step 1\", \"step 2\", \"step 3\", \"step 4\"],\\n      \"done\": false\\n    }\\n  ]\\n}` }], temperature: 0.3, max_tokens: 1500 }) }}",
+        "options": {}
+      },
+      "id": "complaint-draft",
+      "name": "5. Act - Complaint & Action Plan",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Assemble the final response with REAL data enrichment\nconst parseGroq = (node) => {\n  try {\n    const text = node.choices[0].message.content;\n    const cleaned = text.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n    return JSON.parse(cleaned);\n  } catch (e) {\n    return null;\n  }\n};\n\nconst mergedData = $('Merge Real Data + Classification').first().json;\nconst classify = parseGroq(mergedData.classification);\nconst evidence = parseGroq($('2. Gather - Evidence Checklist').first().json);\nconst legal = parseGroq($('3. Protect - Legal Interpretation').first().json);\nconst recovery = parseGroq($('4. Empower - Recovery Probability').first().json);\nconst complaint = parseGroq($('5. Act - Complaint & Action Plan').first().json);\n\nreturn [{\n  json: {\n    whatHappened: classify || { crimeType: 'Cybercrime', summary: 'We were unable to classify this precisely, but your report has been noted.', reassurance: 'Please still follow the action plan below.' },\n    evidenceChecklist: Array.isArray(evidence) ? evidence : [],\n    legalProtections: Array.isArray(legal) ? legal : [],\n    recoveryWindow: recovery || { percentage: 50, message: 'Act quickly for the best chances.', hoursRemaining: 24, encouragement: 'Every step helps.' },\n    actionPlan: complaint?.actionPlan || [],\n    complaintDraft: complaint?.complaintDraft || 'Unable to generate complaint draft. Please visit cybercrime.gov.in directly.',\n    // REAL DATA passed through to frontend\n    helplines: mergedData.relevantHelplines,\n    chargebackWindowHours: mergedData.chargebackWindow\n  }\n}];"
+      },
+      "id": "assemble-response",
+      "name": "Assemble Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Case Log",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ new Date().toISOString() }}",
+            "description": "={{ $node['Webhook Trigger'].json.body.description.substring(0, 200) }}",
+            "amountLost": "={{ $node['Webhook Trigger'].json.body.amountLost }}",
+            "incidentTime": "={{ $node['Webhook Trigger'].json.body.incidentTime }}",
+            "paymentPlatform": "={{ $node['Webhook Trigger'].json.body.paymentPlatform }}",
+            "crimeType": "={{ $json.whatHappened.crimeType }}",
+            "recoveryProbability": "={{ $json.recoveryWindow.percentage }}",
+            "chargebackWindow": "={{ $json.chargebackWindowHours }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "google-sheets-log",
+      "name": "Log Case to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1980,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1980,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "fraud_desk@dummybank.com",
+        "subject": "={{ 'URGENT: Fraudulent Transaction Freeze Request - ' + $json.webhookData.paymentPlatform }}",
+        "message": "={{ 'Dear Fraud Desk,\\n\\nA fraudulent transaction has been reported on platform ' + $json.webhookData.paymentPlatform + '.\\n\\nAmount: ₹' + $json.webhookData.amountLost + '\\nIncident Time: ' + $json.webhookData.incidentTime + '\\n\\nPlease freeze these funds immediately as per RBI guidelines.\\n\\nDescription:\\n' + $json.webhookData.description + '\\n\\nRegards,\\nFirstHour Automated System' }}",
+        "appendAttribution": false
+      },
+      "id": "email-bank",
+      "name": "Email Bank Fraud Desk",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2200,
+        300
+      ],
+      "notes": "Sends details to the bank's fraud desk immediately"
+    },
+    {
+      "parameters": {
+        "sendTo": "victim@example.com",
+        "subject": "FirstHour: Your Action Plan & Complaint Draft",
+        "message": "={{ 'Here is your personalized action plan and complaint draft.\\n\\n' + JSON.stringify($json.actionPlan, null, 2) + '\\n\\nCOMPLAINT DRAFT:\\n' + $json.complaintDraft }}",
+        "appendAttribution": false
+      },
+      "id": "email-victim",
+      "name": "Email Action Plan to Victim",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2200,
+        500
+      ],
+      "notes": "Emails the complete summary to the victim so they don't lose it"
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "hours"
+      },
+      "id": "wait-2h",
+      "name": "Wait 2 Hours",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2420,
+        300
+      ],
+      "webhookId": "dummy-wait-2h"
+    },
+    {
+      "parameters": {
+        "sendTo": "victim@example.com",
+        "subject": "FirstHour Reminder: Have you visited your bank branch?",
+        "message": "Hi,\n\nIt's been 2 hours since you reported the fraud. Have you visited your bank branch yet to secure a written acknowledgement? This is critical.\n\nStay strong.\nFirstHour",
+        "appendAttribution": false
+      },
+      "id": "email-2h",
+      "name": "2-Hour Reminder",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2640,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 22,
+        "unit": "hours"
+      },
+      "id": "wait-24h",
+      "name": "Wait 24 Hours",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2860,
+        300
+      ],
+      "webhookId": "dummy-wait-24h"
+    },
+    {
+      "parameters": {
+        "sendTo": "victim@example.com",
+        "subject": "FirstHour Reminder: Have you filed the FIR?",
+        "message": "Hi,\n\nIt's been a day. Have you filed the FIR at your local police station? It is required for chargebacks and insurance.\n\nFirstHour",
+        "appendAttribution": false
+      },
+      "id": "email-24h",
+      "name": "24-Hour Reminder",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        3080,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "path": "firsthour-followup",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "webhook-followup",
+      "name": "Follow-Up Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        700
+      ],
+      "webhookId": "firsthour-followup-endpoint"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: 'You are the FirstHour guide, an empathetic assistant helping Indian cybercrime victims through their action plan. They just completed some steps. Always respond with ONLY valid JSON, no markdown, no code fences. Output: { \"message\": \"Encouraging/guiding text\", \"nextSteps\": [\"step 1\", \"step 2\"], \"encouragement\": \"Short sign off\" }' }, { role: 'user', content: `Crime: ${$json.body.crimeType}\\nPlatform: ${$json.body.paymentPlatform}\\nAmount: ${$json.body.amountLost}\\nCompleted steps:\\n${$json.body.completedSteps.join('\\n')}\\nCurrent Phase: ${$json.body.currentPhase}\\nUser says: ${$json.body.userMessage}\\n\\nAcknowledge their progress and tell them exactly what to do next based on the phase they are in.` }], temperature: 0.3, max_tokens: 500 }) }}",
+        "options": {}
+      },
+      "id": "groq-followup",
+      "name": "Groq Follow-Up Chat",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.choices[0].message.content }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-followup",
+      "name": "Respond Follow-Up",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        700
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "1. Understand - Classify Crime",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Helpline Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1. Understand - Classify Crime": {
+      "main": [
+        [
+          {
+            "node": "Merge Real Data + Classification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Helpline Database": {
+      "main": [
+        [
+          {
+            "node": "Merge Real Data + Classification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Real Data + Classification": {
+      "main": [
+        [
+          {
+            "node": "2. Gather - Evidence Checklist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Gather - Evidence Checklist": {
+      "main": [
+        [
+          {
+            "node": "3. Protect - Legal Interpretation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Protect - Legal Interpretation": {
+      "main": [
+        [
+          {
+            "node": "4. Empower - Recovery Probability",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4. Empower - Recovery Probability": {
+      "main": [
+        [
+          {
+            "node": "5. Act - Complaint & Action Plan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5. Act - Complaint & Action Plan": {
+      "main": [
+        [
+          {
+            "node": "Assemble Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log Case to Google Sheets",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Bank Fraud Desk",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Action Plan to Victim",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Bank Fraud Desk": {
+      "main": [
+        [
+          {
+            "node": "Wait 2 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 2 Hours": {
+      "main": [
+        [
+          {
+            "node": "2-Hour Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2-Hour Reminder": {
+      "main": [
+        [
+          {
+            "node": "Wait 24 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 24 Hours": {
+      "main": [
+        [
+          {
+            "node": "24-Hour Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Follow-Up Webhook": {
+      "main": [
+        [
+          {
+            "node": "Groq Follow-Up Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Follow-Up Chat": {
+      "main": [
+        [
+          {
+            "node": "Respond Follow-Up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

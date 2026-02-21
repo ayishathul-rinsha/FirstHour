@@ -1,0 +1,125 @@
+/* ===================================
+   FirstHour — Global Design System
+   Warm Dark Mode with Glassmorphism
+   =================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* CSS Custom Properties */
+:root {
+    /* Base Colors */
+    --bg-primary: #0f141e;
+    --bg-secondary: #151b28;
+
+    /* Surfaces */
+    --surface-primary: rgba(21, 27, 40, 0.85);
+    --surface-secondary: rgba(30, 38, 55, 0.6);
+
+    /* Text */
+    --text-primary: #e8ecf4;
+    --text-secondary: #a0aec0;
+    --text-muted: #6b7a90;
+
+    /* Borders */
+    --border-color: rgba(255, 255, 255, 0.08);
+
+    /* Accent Colors — warm and hopeful */
+    --accent-teal: #63b3a3;
+    --accent-amber: #eab363;
+    --accent-violet: #a78bfa;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Subtle background gradient */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 20%, rgba(99, 179, 163, 0.06), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(167, 139, 250, 0.04), transparent);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure content above the gradient */
+app-root {
+    position: relative;
+    z-index: 1;
+}
+
+/* Selection */
+::selection {
+    background: rgba(99, 179, 163, 0.3);
+    color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Focus styles */
+:focus-visible {
+    outline: 2px solid var(--accent-teal);
+    outline-offset: 2px;
+}
+
+/* Utility animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
