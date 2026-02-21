@@ -168,10 +168,6 @@ Use this EXACT schema:
 
                 aiResult.helplines = Array.from(uniqueMap.values());
                 return aiResult;
-            }),
-            catchError((err) => {
-                console.error('API or Parsing Error:', err);
-                return of(this.getMockResult(report));
             })
         );
     }
