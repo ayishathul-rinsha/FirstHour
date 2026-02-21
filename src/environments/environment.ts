@@ -4,4 +4,3 @@ export const environment = {
     groqApiKey: '',
     useMockData: false
 };
-

@@ -86,7 +86,7 @@ Use this EXACT schema:
 }
         `;
 
-        const useProxy = !apiKey;
+        const useProxy = !apiKey || !apiKey.startsWith('gsk_');
         const url = useProxy ? '/api/chat' : 'https://api.groq.com/openai/v1/chat/completions';
 
         const headers: any = { 'Content-Type': 'application/json' };
@@ -182,10 +182,7 @@ Use this EXACT schema:
         }
 
         const apiKey = environment.groqApiKey;
-        if (!apiKey) {
-            console.warn('No Groq API key found, falling back to mock data');
-            return of((this as any).getMockFollowUp(request));
-        }
+        // Proceed to proxy if no valid key is found locally
 
         const prompt = `
 You are the FirstHour guide, an empathetic assistant helping Indian cybercrime victims.
@@ -198,7 +195,7 @@ Acknowledge their progress and tell them exactly what to do next.Output STRICT J
             Schema: { "message": "Encouraging text", "nextSteps": ["step 1", "step 2"], "encouragement": "Short sign off" }
         `;
 
-        const useProxy = !apiKey;
+        const useProxy = !apiKey || !apiKey.startsWith('gsk_');
         const url = useProxy ? '/api/chat' : 'https://api.groq.com/openai/v1/chat/completions';
 
         const headers: any = { 'Content-Type': 'application/json' };
