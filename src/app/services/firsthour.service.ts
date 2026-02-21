@@ -359,7 +359,16 @@ Thanking you,
 [Your Full Name]
 [Your Phone Number]
 [Your Email Address]
-Date: ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}`
+Date: ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}`,
+            helplines: [
+                {
+                    bankPlatform: 'National Cyber Crime',
+                    fraudHelpline: '1930',
+                    nodalOfficerEmail: 'complaint-cyber@gov.in',
+                    chargebackWindow: '24',
+                    officialPortal: 'https://cybercrime.gov.in'
+                }
+            ]
         };
     }
 }
