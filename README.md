@@ -65,23 +65,10 @@ npm run build
 
 ## Architecture Diagram
 
-\`\`\`mermaid
-graph TD
-    A[Victim Submits Form] -->|Angular App| B(FirsthourService)
-    B -->|Concurrent Request 1| C{Groq API / Llama 3}
-    B -->|Concurrent Request 2| D[(Local helplines.csv)]
-    D -->|PapaParse| E[Offline Parsing]
-    C -->|Generate FIR & Steps| F(Merge Data)
-    E -->|Extract Nodal Officer| F
-    F -->|Render| G[Dashboard Component]
-    G -->|html2canvas + jsPDF| H[Download PDF Case Logs]
-\`\`\`
-
 ## API Documentation
 Because FirstHour operates on a **100% Serverless SPA Architecture**, there is no proprietary backend API to document. The application communicates directly from the client browser to the Groq API inference endpoints.
 
 ## Team Members
-- [Your Name / Username] - Lead Developer
+- Ayishathul Rinsha - Lead Developer
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
