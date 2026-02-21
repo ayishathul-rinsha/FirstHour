@@ -65,14 +65,10 @@ This project uses a **Serverless API Proxy** to protect your Groq API Key. This 
 3. **Automatic Protection:** The app will automatically detect if the key is missing in the browser and use the secure \`/api/chat\` backend bridge instead.
 
 ## Screenshots
-*(Replace with actual image links once hosted)*
-1. ![Landing Page](docs/screenshot1.png) - Incident Reporting Form
-2. ![Results Dashboard](docs/screenshot2.png) - AI Generated Action Plan & FIR
-3. ![Helpline UI](docs/screenshot3.png) - Dynamically Resolved Bank Helplines
+https://drive.google.com/drive/folders/18xctH7gWe3UD3RMxlOMYOg7kGzaQM7W5?usp=sharing
 
 ## Demo Video
-*(Replace with actual YouTube/Loom link)*
-[Watch the Demo Video Here](https://youtube.com/your-video-link)
+
 
 ## Architecture Diagram
 
