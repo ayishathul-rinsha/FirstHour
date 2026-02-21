@@ -1,0 +1,482 @@
+16:52:20.246   [34mdebug[39m   [34mUser settings loaded from: C:\Users\hp\.n8n\config[39m [2m{ "file": "instance-settings.js", "function": "loadOrCreate" }[22m
+16:52:20.359   [34mdebug[39m   [34mReceived CLI command[39m [2m{ "execPath": "C: \\Program Files\\nodejs\\node.exe", "scriptPath": "C: \\Users\\hp\\AppData\\Local\\npm-cache\\_npx\\a8a7eec953f1f314\\node_modules\\n8n\\bin\\n8n", "args": [], "flags": { }, "file": "cli-parser.js", "function": "parse" }[22m
+16:52:20.362   [32minfo[39m    [32mInitializing n8n process[39m [2m{ "file": "start.js", "function": "init" }[22m
+16:52:20.483   [34mdebug[39m   [34mLazy-loading nodes and credentials from n8n-nodes-base[39m [2m{ "nodes": 480, "credentials": 387, "file": "lazy-package-directory-loader.js", "function": "loadAll" }[22m
+16:52:20.495   [34mdebug[39m   [34mLazy-loading nodes and credentials from @n8n/n8n-nodes-langchain[39m [2m{ "nodes": 115, "credentials": 29, "file": "lazy-package-directory-loader.js", "function": "loadAll" }[22m
+16:52:20.634   [34mdebug[39m   [34mContext establishment hooks feature is disabled[39m [2m{ "file": "load-nodes-and-credentials.js", "function": "injectContextEstablishmentHooks" }[22m
+16:52:22.629   [32minfo[39m    [32mn8n ready on ::, port 5678[39m [2m{ "file": "abstract-server.js", "function": "init" }[22m
+16:52:22.640   [34mdebug[39m   [34mInitializing AuthRolesService...[39m [2m{ "file": "auth.roles.service.js", "function": "init" }[22m
+16:52:22.646   [34mdebug[39m   [34mNo scopes to update.[39m [2m{ "file": "auth.roles.service.js", "function": "syncScopes" }[22m
+16:52:22.647   [34mdebug[39m   [34mNo obsolete scopes to delete.[39m [2m{ "file": "auth.roles.service.js", "function": "syncScopes" }[22m
+16:52:22.657   [34mdebug[39m   [34mNo global roles to update.[39m [2m{ "file": "auth.roles.service.js", "function": "syncRoles" }[22m
+16:52:22.659   [34mdebug[39m   [34msecurity.personalSpacePublishing is enabled - allowing workflow:publish scopes to project:personalOwner role[39m [2m{ "file": "auth.roles.service.js", "function": "getPersonalOwnerSettingsScopes" }[22m
+16:52:22.659   [34mdebug[39m   [34msecurity.personalSpaceSharing is enabled - allowing workflow:share, credential:share, credential:move scopes to project:personalOwner role[39m [2m{ "file": "auth.roles.service.js", "function": "getPersonalOwnerSettingsScopes" }[22m
+16:52:22.660   [34mdebug[39m   [34mNo project roles to update.[39m [2m{ "file": "auth.roles.service.js", "function": "syncRoles" }[22m
+16:52:22.660   [34mdebug[39m   [34mNo credential roles to update.[39m [2m{ "file": "auth.roles.service.js", "function": "syncRoles" }[22m
+16:52:22.660   [34mdebug[39m   [34mNo workflow roles to update.[39m [2m{ "file": "auth.roles.service.js", "function": "syncRoles" }[22m
+16:52:22.660   [34mdebug[39m   [34mAuthRolesService initialized successfully.[39m [2m{ "file": "auth.roles.service.js", "function": "init" }[22m
+16:52:22.700   [32minfo[39m    [32mn8n Task Broker ready on 127.0.0.1, port 5679[39m [2m{ "file": "task-broker-server.js", "function": "setupHttpServer" }[22m
+16:52:22.801   [33mwarn[39m    [33mFailed to start Python task runner in internal mode. because its virtual environment is missing from this system. Launching a Python runner in internal mode is intended only for debugging and is not recommended for production. Users are encouraged to deploy in external mode. See: https://docs.n8n.io/hosting/configuration/task-runners/#setting-up-external-mode[39m [2m{ "scopes": ["task-runner"], "file": "task-runner-module.js", "function": "startInternalTaskRunners" }[22m
+16:52:22.843   [34mdebug[39m   [34m[license SDK] initializing for deviceFingerprint 08749f5b00868df433ec2020ebc7070b59a89113604cae42701181dbd7e6d4a2[39m [2m{ "scopes": ["license"], "file": "LicenseManager.js", "function": "log" }[22m
+16:52:22.844   [32minfo[39m    [32m[license SDK] Skipping renewal on init: license cert is not initialized[39m [2m{ "scopes": ["license"], "file": "LicenseManager.js", "function": "log" }[22m
+16:52:22.844   [34mdebug[39m   [34mLicense initialized[39m [2m{ "scopes": ["license"], "file": "license.js", "function": "init" }[22m
+16:52:22.845   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+16:52:22.846   [34mdebug[39m   [34mStarted tracking waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "startTracking" }[22m
+16:52:22.847   [34mdebug[39m   [34mWait tracker init complete[39m [2m{ "file": "start.js", "function": "init" }[22m
+16:52:22.847   [34mdebug[39m   [34mLoading overwrite credentials from static envvar[39m [2m{ "file": "credentials-overwrites.js", "function": "init" }[22m
+16:52:22.847   [34mdebug[39m   [34mCredentials overwrites init complete[39m [2m{ "file": "start.js", "function": "init" }[22m
+16:52:22.852   [34mdebug[39m   [34mBinary data service init complete[39m [2m{ "file": "start.js", "function": "init" }[22m
+16:52:22.853   [34mdebug[39m   [34mData deduplication service init complete[39m [2m{ "file": "start.js", "function": "init" }[22m
+16:52:22.853   [34mdebug[39m   [34mExternal hooks init complete[39m [2m{ "file": "start.js", "function": "init" }[22m
+16:52:22.853   [34mdebug[39m   [34mWorkflow history init complete[39m [2m{ "file": "start.js", "function": "init" }[22m
+16:52:22.856   [34mdebug[39m   [34mTest runner cleanup complete[39m [2m{ "file": "start.js", "function": "init" }[22m
+16:52:24.088   [34mdebug[39m   [34mStarted flushing timer[39m [2m{ "scopes": ["insights"], "file": "insights-collection.service.js", "function": "init" }[22m
+16:52:24.088   [34mdebug[39m   [34mStarted compaction timer[39m [2m{ "scopes": ["insights"], "file": "insights-compaction.service.js", "function": "startCompactionTimer" }[22m
+16:52:24.088   [34mdebug[39m   [34mStarted pruning timer[39m [2m{ "scopes": ["insights"], "file": "insights-pruning.service.js", "function": "startPruningTimer" }[22m
+16:52:24.091   [34mdebug[39m   [34mInitialized module "insights"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.091   [34mdebug[39m   [34mSkipped init for unlicensed module "external-secrets"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.102   [34mdebug[39m   [34mInitialized module "community-packages"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.182   [34mdebug[39m   [34mInitialized module "data-table"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.285   [34mdebug[39m   [34mInitialized module "mcp"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.285   [34mdebug[39m   [34mSkipped init for unlicensed module "provisioning"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.317   [34mdebug[39m   [34mInitialized module "breaking-changes"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.317   [34mdebug[39m   [34mSkipped init for unlicensed module "source-control"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.317   [34mdebug[39m   [34mSkipped init for unlicensed module "dynamic-credentials"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.375   [34mdebug[39m   [34mInitialized module "chat-hub"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.375   [34mdebug[39m   [34mSkipped init for unlicensed module "sso-oidc"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.376   [34mdebug[39m   [34mSkipped init for unlicensed module "sso-saml"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.376   [34mdebug[39m   [34mSkipped init for unlicensed module "log-streaming"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.376   [34mdebug[39m   [34mSkipped init for unlicensed module "ldap"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.388   [34mdebug[39m   [34mInitialized module "quick-connect"[39m [2m{ "file": "module-registry.js", "function": "initModules" }[22m
+16:52:24.388   [34mdebug[39m   [34mRegistering 1 auth handlers.[39m [2m{ "file": "auth-handler.registry.js", "function": "init" }[22m
+16:52:24.389   [34mdebug[39m   [34mRegistering 1 execution context hooks.[39m [2m{ "file": "execution-context-hook-registry.service.js", "function": "init" }[22m
+16:52:24.519   [34mdebug[39m   [34mContext establishment hooks feature is disabled[39m [2m{ "file": "load-nodes-and-credentials.js", "function": "injectContextEstablishmentHooks" }[22m
+16:52:25.537   [32minfo[39m    [32mRegistered runner "JS Task Runner" (b_D_2HWlY4Rv1Gl55wOvc) [39m [2m{ "file": "task-broker-ws-server.js", "function": "onMessage" }[22m
+16:52:25.712   [34mdebug[39m   [34mRegistered a "reload-license" event handler on License#reload[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.712   [34mdebug[39m   [34mRegistered a "relay-execution-lifecycle-event" event handler on Push#handleRelayExecutionLifecycleEvent[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.712   [34mdebug[39m   [34mRegistered a "reload-overwrite-credentials" event handler on CredentialsOverwrites#reloadOverwriteCredentials[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.713   [34mdebug[39m   [34mRegistered a "clear-test-webhooks" event handler on TestWebhooks#handleClearTestWebhooks[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.713   [34mdebug[39m   [34mRegistered a "display-workflow-activation" event handler on ActiveWorkflowManager#handleDisplayWorkflowActivation[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.713   [34mdebug[39m   [34mRegistered a "display-workflow-deactivation" event handler on ActiveWorkflowManager#handleDisplayWorkflowDeactivation[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.713   [34mdebug[39m   [34mRegistered a "display-workflow-activation-error" event handler on ActiveWorkflowManager#handleDisplayWorkflowActivationError[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.713   [34mdebug[39m   [34mRegistered a "add-webhooks-triggers-and-pollers" event handler on ActiveWorkflowManager#handleAddWebhooksTriggersAndPollers[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.713   [34mdebug[39m   [34mRegistered a "remove-triggers-and-pollers" event handler on ActiveWorkflowManager#handleRemoveTriggersAndPollers[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.713   [34mdebug[39m   [34mRegistered a "response-to-get-worker-status" event handler on WorkerStatusService#handleWorkerStatusResponse[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.713   [34mdebug[39m   [34mRegistered a "community-package-update" event handler on CommunityPackagesService#handleInstallEvent[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.714   [34mdebug[39m   [34mRegistered a "community-package-install" event handler on CommunityPackagesService#handleInstallEvent[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.714   [34mdebug[39m   [34mRegistered a "community-package-uninstall" event handler on CommunityPackagesService#handleUninstallEvent[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.714   [34mdebug[39m   [34mRegistered a "relay-chat-stream-event" event handler on ChatStreamService#handleRelayChatStreamEvent[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.714   [34mdebug[39m   [34mRegistered a "relay-chat-human-message" event handler on ChatStreamService#handleRelayChatHumanMessage[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.714   [34mdebug[39m   [34mRegistered a "relay-chat-message-edit" event handler on ChatStreamService#handleRelayChatMessageEdit[39m [2m{ "scopes": ["pubsub"], "file": "pubsub.registry.js", "function": "init" }[22m
+16:52:25.725   [34mdebug[39m   [34mRegistered rule: removed-nodes-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.725   [34mdebug[39m   [34mRegistered rule: process-env-access-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.725   [34mdebug[39m   [34mRegistered rule: pyodide-removed-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.725   [34mdebug[39m   [34mRegistered rule: file-access-restriction-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: disabled-nodes-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: wait-node-subworkflow-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: start-node-removed-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: dotenv-upgrade-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: oauth-callback-auth-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: cli-activate-all-workflows-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: workflow-hooks-deprecated-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: queue-worker-max-stalled-count-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: tunnel-option-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: settings-file-permissions-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: task-runners-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: task-runner-docker-image-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.726   [34mdebug[39m   [34mRegistered rule: binary-data-storage-v2[39m [2m{ "scopes": ["breaking-changes"], "file": "breaking-changes.rule-registry.service.js", "function": "register" }[22m
+16:52:25.731   [34mdebug[39m   [34mInitializing event bus...[39m [2m{ "file": "message-event-bus.js", "function": "initialize" }[22m
+16:52:25.731   [34mdebug[39m   [34mInitializing event writer[39m [2m{ "file": "message-event-bus.js", "function": "initialize" }[22m
+16:52:25.733   [34mdebug[39m   [34mChecking for unsent event messages[39m [2m{ "file": "message-event-bus.js", "function": "initialize" }[22m
+16:52:25.772   [34mdebug[39m   [34mStart logging into C:\Users\hp\.n8n\n8nEventLog.log [39m [2m{ "file": "message-event-bus.js", "function": "initialize" }[22m
+16:52:25.781   [34mdebug[39m   [34mMessageEventBus initialized[39m [2m{ "file": "message-event-bus.js", "function": "initialize" }[22m
+16:52:25.790   [32minfo[39m    [32mVersion: 2.8.3[39m [2m{ "file": "abstract-server.js", "function": "start" }[22m
+16:52:25.790   [34mdebug[39m   [34mServer ID: main-7RT6G3bFFfSaPu7a[39m [2m{ "file": "server.js", "function": "start" }[22m
+16:52:25.792   [32minfo[39m    [32mBuilding workflow dependency index...[39m [2m{ "file": "workflow-index.service.js" }[22m
+16:52:25.794   [34mdebug[39m   [34mSoft-deletion every 60 minutes[39m [2m{ "scopes": ["pruning"], "file": "executions-pruning.service.js", "function": "scheduleRollingSoftDeletions" }[22m
+16:52:25.794   [34mdebug[39m   [34mHard-deletion in next 15 minutes[39m [2m{ "scopes": ["pruning"], "file": "executions-pruning.service.js", "function": "scheduleNextHardDeletion" }[22m
+16:52:25.794   [34mdebug[39m   [34mStarted pruning timers[39m [2m{ "scopes": ["pruning"], "file": "executions-pruning.service.js", "function": "startPruning" }[22m
+16:52:25.795   [34mdebug[39m   [34mStarted workflow histories optimization and trimming[39m [2m{ "scopes": ["workflow-history-compaction"], "optimizingMinimumAgeHours": 0.25, "optimizingTimeWindowHours": 2, "trimmingMinimumAgeDays": 7, "trimmingTimeWindowDays": 2, "batchSize": 100, "batchDelayMs": 1000, "trimOnStartUp": false, "file": "workflow-history-compaction.service.js", "function": "startCompacting" }[22m
+16:52:25.795   [34mdebug[39m   [34mOptimizing histories every 1 hour(s)[39m [2m{ "scopes": ["workflow-history-compaction"], "file": "workflow-history-compaction.service.js", "function": "scheduleOptimization" }[22m
+16:52:25.795   [34mdebug[39m   [34mStarting workflow history compaction[39m [2m{ "scopes": ["workflow-history-compaction"], "dateRange": { "start": "2026-02-21T09: 07: 25.795Z", "end": "2026-02-21T11: 07: 25.795Z" }, "config": { "optimizingMinimumAgeHours": 0.25, "optimizingTimeWindowHours": 2, "trimmingMinimumAgeDays": 7, "trimmingTimeWindowDays": 2, "batchSize": 100, "batchDelayMs": 1000, "trimOnStartUp": false }, "file": "workflow-history-compaction.service.js", "function": "compactHistories" }[22m
+16:52:25.796   [34mdebug[39m   [34mTrimming histories once a day at 3am server time[39m [2m{ "scopes": ["workflow-history-compaction"], "file": "workflow-history-compaction.service.js", "function": "scheduleTrimming" }[22m
+2026-02-21T11:22:25.801Z [Rudder] debug: in flush
+2026-02-21T11:22:25.811Z [Rudder] debug: no existing flush timer, creating new one
+16:52:25.857   [34mdebug[39m   [34mFound 1 workflows with versions between 2026-02-21T09:07:25.795Z and 2026-02-21T11:07:25.795Z[39m [2m{ "scopes": ["workflow-history-compaction"], "file": "workflow-history-compaction.service.js", "function": "compactHistories" }[22m
+16:52:25.862   [32minfo[39m    [32mStart Active Workflows:[39m [2m{ "scopes": ["workflow-activation"], "file": "active-workflow-manager.js", "function": "addActiveWorkflows" }[22m
+(node:18940) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+16:52:27.037   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+16:52:27.037   [34mdebug[39m   [34mIndexed 1 draft workflows so far[39m [2m{ "file": "workflow-index.service.js", "function": "buildIndexInternal" }[22m
+16:52:27.153   [34mdebug[39m   [34mDeleted 0 of 9 versions of workflow 5soejoAjvOyYwvtO between 2026-02-21T09:07:25.795Z and 2026-02-21T11:07:25.795Z[39m [2m{ "scopes": ["workflow-history-compaction"], "file": "workflow-history-compaction.service.js", "function": "compactHistories" }[22m
+16:52:27.154   [34mdebug[39m   [34mWorkflow history compaction complete[39m [2m{ "scopes": ["workflow-history-compaction"], "workflowsProcessed": 1, "totalVersionsSeen": 9, "totalVersionsDeleted": 0, "errorCount": 0, "durationMs": 1359, "compactionStartTime": "2026-02-21T11: 22: 25.795Z", "windowStartIso": "2026-02-21T09: 07: 25.795Z", "windowEndIso": "2026-02-21T11: 07: 25.795Z", "file": "workflow-history-compaction.service.js", "function": "compactHistories" }[22m
+16:52:27.156   [32minfo[39m    [32mFinished building workflow dependency index. Processed 1 draft workflows, 0 published workflows.[39m [2m{ "file": "workflow-index.service.js" }[22m
+16:52:27.163   [34mdebug[39m   [34mAdded webhooks for workflow "FirstHour - Cybercrime Response Pipeline (Groq + Real Data)" (ID 5soejoAjvOyYwvtO)[39m [2m{ "scopes": ["workflow-activation"], "workflowId": "5soejoAjvOyYwvtO", "file": "active-workflow-manager.js", "function": "addWebhooks" }[22m
+16:52:27.241   [32minfo[39m    [32mActivated workflow "FirstHour - Cybercrime Response Pipeline (Groq + Real Data)" (ID: 5soejoAjvOyYwvtO)[39m [2m{ "scopes": ["workflow-activation"], "workflowName": "FirstHour - Cybercrime Response Pipeline (Groq + Real Data)", "workflowId": "5soejoAjvOyYwvtO", "file": "active-workflow-manager.js", "function": "activateWorkflow" }[22m
+16:52:27.241   [34mdebug[39m   [34mFinished activating all workflows[39m [2m{ "scopes": ["workflow-activation"], "file": "active-workflow-manager.js", "function": "addActiveWorkflows" }[22m
+16:52:27.242   [32minfo[39m    [32m[39m
+[32mEditor is now accessible via:[39m
+[32mhttp://localhost:5678[39m [2m{ "file": "base-command.js", "function": "log" }[22m
+2026-02-21T11:22:35.823Z [Rudder] debug: in flush
+2026-02-21T11:22:35.823Z [Rudder] debug: cancelling existing flushTimer...
+16:52:37.850   [34mdebug[39m   [34mReceived webhook "POST" for path "firsthour"[39m [2m{ "file": "live-webhooks.js", "function": "executeWebhook" }[22m
+16:52:37.986   [31merror[39m   [31mError in handling webhook request POST /webhook/firsthour: There was a problem executing the workflow[39m [2m{ "stacktrace": "Error:  There was a problem executing the workflow\n    at Object.executeWebhook (C: \\Users\\hp\\AppData\\Local\\npm-cache\\_npx\\a8a7eec953f1f314\\node_modules\\n8n\\src\\webhooks\\webhook-helpers.ts: 912: 7)\n    at processTicksAndRejections (node: internal/process/task_queues: 105: 5)", "file": "webhook-request-handler.js", "function": "handleRequest" }[22m
+16:53:22.859   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+16:54:22.860   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+16:55:22.867   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+16:56:22.872   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+16:57:22.873   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+16:58:22.873   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+16:59:22.878   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:00:22.882   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:01:22.896   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:02:22.901   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:03:22.909   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+(node:18940) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+17:04:06.009   [34mdebug[39m   [34mSkipped browserId check on /rest/push[39m [2m{ "file": "auth.service.js", "function": "validateBrowserId" }[22m
+17:04:06.046   [34mdebug[39m   [34mAdd editor-UI session[39m [2m{ "pushRef": "leivgfk004", "file": "abstract.push.js", "function": "add" }[22m
+17:04:06.223   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "workflowOpened", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:04:06.252   [34mdebug[39m   [34mPushed to frontend: collaboratorsChanged[39m [2m{ "dataType": "collaboratorsChanged", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:04:13.036   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:04:13.057   [34mdebug[39m   [34mPushed to frontend: writeAccessAcquired[39m [2m{ "dataType": "writeAccessAcquired", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:04:15.721   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "208626d7-3496-482f-b4bc-4512804c7f66", "newVersionId": "240126b5-dc06-4bb9-956d-0818c2e9f253", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:34:15.869Z [Rudder] debug: no existing flush timer, creating new one
+17:04:15.926   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:04:22.915   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+2026-02-21T11:34:25.873Z [Rudder] debug: in flush
+2026-02-21T11:34:25.873Z [Rudder] debug: cancelling existing flushTimer...
+17:04:31.069   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "240126b5-dc06-4bb9-956d-0818c2e9f253", "newVersionId": "b26879e8-c229-4504-9096-057da17782c6", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:34:31.096Z [Rudder] debug: no existing flush timer, creating new one
+17:04:31.106   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:04:40.413   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "b26879e8-c229-4504-9096-057da17782c6", "newVersionId": "6a6c030b-afa4-4553-9f65-a064b739765c", "file": "workflow.service.js", "function": "update" }[22m
+17:04:40.458   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:34:41.103Z [Rudder] debug: in flush
+2026-02-21T11:34:41.103Z [Rudder] debug: cancelling existing flushTimer...
+17:04:43.079   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessHeartbeat", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:04:50.616   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "6a6c030b-afa4-4553-9f65-a064b739765c", "newVersionId": "3d37a399-bf35-4ad6-97b8-9805329306d9", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:34:50.650Z [Rudder] debug: no existing flush timer, creating new one
+17:04:50.658   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:04:56.989   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "3d37a399-bf35-4ad6-97b8-9805329306d9", "newVersionId": "0a41bd49-f9da-41d6-b15c-3f83edd546e0", "file": "workflow.service.js", "function": "update" }[22m
+17:04:57.025   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:35:00.653Z [Rudder] debug: in flush
+2026-02-21T11:35:00.653Z [Rudder] debug: cancelling existing flushTimer...
+17:05:07.292   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "0a41bd49-f9da-41d6-b15c-3f83edd546e0", "newVersionId": "a1c2922e-ee42-4bd5-87c7-4f7d0a040be9", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:35:07.370Z [Rudder] debug: no existing flush timer, creating new one
+17:05:07.382   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:05:13.074   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessHeartbeat", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:05:15.575   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "a1c2922e-ee42-4bd5-87c7-4f7d0a040be9", "newVersionId": "d354f3fa-0d1d-4327-b6a3-8164bf838392", "file": "workflow.service.js", "function": "update" }[22m
+17:05:15.603   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:35:17.371Z [Rudder] debug: in flush
+2026-02-21T11:35:17.371Z [Rudder] debug: cancelling existing flushTimer...
+17:05:22.925   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:05:27.423   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "d354f3fa-0d1d-4327-b6a3-8164bf838392", "newVersionId": "a4699e44-8217-434b-9ec7-38abc91de5c2", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:35:27.452Z [Rudder] debug: no existing flush timer, creating new one
+17:05:27.465   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:05:35.320   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "a4699e44-8217-434b-9ec7-38abc91de5c2", "newVersionId": "24941c72-5b1a-4150-876d-fa18156afb4c", "file": "workflow.service.js", "function": "update" }[22m
+17:05:35.352   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:35:37.454Z [Rudder] debug: in flush
+2026-02-21T11:35:37.455Z [Rudder] debug: cancelling existing flushTimer...
+17:05:43.076   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessHeartbeat", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:05:45.689   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "24941c72-5b1a-4150-876d-fa18156afb4c", "newVersionId": "7f30b510-4b61-4d14-ae6f-cd4d302c26fc", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:35:45.720Z [Rudder] debug: no existing flush timer, creating new one
+17:05:45.733   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:05:52.462   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "7f30b510-4b61-4d14-ae6f-cd4d302c26fc", "newVersionId": "0337bfc5-0178-4413-8031-5df5206dff68", "file": "workflow.service.js", "function": "update" }[22m
+17:05:52.499   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:35:55.726Z [Rudder] debug: in flush
+2026-02-21T11:35:55.726Z [Rudder] debug: cancelling existing flushTimer...
+17:06:08.552   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "0337bfc5-0178-4413-8031-5df5206dff68", "newVersionId": "ca72558f-50a2-4f47-a744-b4e6f2f695ac", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:36:08.576Z [Rudder] debug: no existing flush timer, creating new one
+17:06:08.592   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:06:13.071   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessHeartbeat", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:06:13.345   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "ca72558f-50a2-4f47-a744-b4e6f2f695ac", "newVersionId": "ba7dc64b-45db-4b17-913d-ae2648f5fe36", "file": "workflow.service.js", "function": "update" }[22m
+17:06:13.376   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:36:18.580Z [Rudder] debug: in flush
+2026-02-21T11:36:18.581Z [Rudder] debug: cancelling existing flushTimer...
+17:06:19.165   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "ba7dc64b-45db-4b17-913d-ae2648f5fe36", "newVersionId": "2f22bb5c-6864-41af-a527-f97bc14aa68b", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:36:19.181Z [Rudder] debug: no existing flush timer, creating new one
+17:06:19.199   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:06:22.932   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:06:25.206   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "2f22bb5c-6864-41af-a527-f97bc14aa68b", "newVersionId": "ddde4f32-b181-4bb1-9d98-02885d355c56", "file": "workflow.service.js", "function": "update" }[22m
+17:06:25.237   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:06:28.129   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "ddde4f32-b181-4bb1-9d98-02885d355c56", "newVersionId": "9c614194-af49-403d-84aa-fb0c0ab9a296", "file": "workflow.service.js", "function": "update" }[22m
+17:06:28.159   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:36:29.181Z [Rudder] debug: in flush
+2026-02-21T11:36:29.181Z [Rudder] debug: cancelling existing flushTimer...
+17:06:43.073   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessHeartbeat", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:06:50.518   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "9c614194-af49-403d-84aa-fb0c0ab9a296", "newVersionId": "59406616-4bd6-4816-ac36-09c66539817f", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:36:50.544Z [Rudder] debug: no existing flush timer, creating new one
+17:06:50.555   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:06:54.145   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "59406616-4bd6-4816-ac36-09c66539817f", "newVersionId": "e2696f1d-7bf5-4738-ba14-9b5e2e4f44f6", "file": "workflow.service.js", "function": "update" }[22m
+17:06:54.182   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:37:00.559Z [Rudder] debug: in flush
+2026-02-21T11:37:00.559Z [Rudder] debug: cancelling existing flushTimer...
+17:07:01.117   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "e2696f1d-7bf5-4738-ba14-9b5e2e4f44f6", "newVersionId": "d06de741-e004-4f9a-8051-3d7ff31acb48", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:37:01.145Z [Rudder] debug: no existing flush timer, creating new one
+17:07:01.151   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:37:11.151Z [Rudder] debug: in flush
+2026-02-21T11:37:11.151Z [Rudder] debug: cancelling existing flushTimer...
+17:07:13.328   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessHeartbeat", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:07:22.938   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:07:23.295   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "d06de741-e004-4f9a-8051-3d7ff31acb48", "newVersionId": "7519f3ce-c96d-40ce-8cef-464b8103e99e", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:37:23.322Z [Rudder] debug: no existing flush timer, creating new one
+17:07:23.331   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:07:25.808   [34mdebug[39m   [34mFound no executions to hard-delete[39m [2m{ "scopes": ["pruning"], "file": "executions-pruning.service.js", "function": "hardDelete" }[22m
+17:07:25.808   [34mdebug[39m   [34mHard-deletion in next 15 minutes[39m [2m{ "scopes": ["pruning"], "file": "executions-pruning.service.js", "function": "scheduleNextHardDeletion" }[22m
+2026-02-21T11:37:33.330Z [Rudder] debug: in flush
+2026-02-21T11:37:33.330Z [Rudder] debug: cancelling existing flushTimer...
+17:07:36.767   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "7519f3ce-c96d-40ce-8cef-464b8103e99e", "newVersionId": "1dc7ce28-fdf6-43e2-b709-25f62e373da0", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:37:36.788Z [Rudder] debug: no existing flush timer, creating new one
+17:07:36.794   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:07:38.637   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "1dc7ce28-fdf6-43e2-b709-25f62e373da0", "newVersionId": "d32d44eb-3c6e-428a-ae45-747605a6a55d", "file": "workflow.service.js", "function": "update" }[22m
+17:07:38.682   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:07:43.106   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessHeartbeat", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+2026-02-21T11:37:46.798Z [Rudder] debug: in flush
+2026-02-21T11:37:46.798Z [Rudder] debug: cancelling existing flushTimer...
+17:07:48.587   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "d32d44eb-3c6e-428a-ae45-747605a6a55d", "newVersionId": "57f8f26a-361e-4fd3-bbd3-ba98cefc058d", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:37:48.609Z [Rudder] debug: no existing flush timer, creating new one
+17:07:48.615   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:37:58.609Z [Rudder] debug: in flush
+2026-02-21T11:37:58.609Z [Rudder] debug: cancelling existing flushTimer...
+17:07:59.228   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "57f8f26a-361e-4fd3-bbd3-ba98cefc058d", "newVersionId": "1d2f6e3c-3d96-4aa4-b5a4-ecffbe3c7886", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:37:59.252Z [Rudder] debug: no existing flush timer, creating new one
+17:07:59.262   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:38:09.254Z [Rudder] debug: in flush
+2026-02-21T11:38:09.254Z [Rudder] debug: cancelling existing flushTimer...
+17:08:13.078   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessHeartbeat", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:08:22.963   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:08:36.214   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessReleaseRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:08:36.215   [34mdebug[39m   [34mPushed to frontend: writeAccessReleased[39m [2m{ "dataType": "writeAccessReleased", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:09:22.967   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:10:22.978   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:11:22.981   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:11:48.676   [34mdebug[39m   [34mSkipped browserId check on /rest/oauth2-credential/callback[39m [2m{ "file": "auth.service.js", "function": "validateBrowserId" }[22m
+17:12:22.988   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:13:22.998   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:14:23.003   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:15:23.007   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:16:23.020   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:17:23.023   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:18:23.028   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:19:23.032   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:19:46.838   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:19:48.059   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:19:48.060   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:19:49.650   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "1d2f6e3c-3d96-4aa4-b5a4-ecffbe3c7886", "newVersionId": "52197fa5-f773-42d7-892e-9b4f0cd8d2a7", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:49:49.759Z [Rudder] debug: no existing flush timer, creating new one
+17:19:49.787   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:49:59.760Z [Rudder] debug: in flush
+2026-02-21T11:49:59.760Z [Rudder] debug: cancelling existing flushTimer...
+17:20:12.700   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:14.287   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "52197fa5-f773-42d7-892e-9b4f0cd8d2a7", "newVersionId": "428783c9-0993-45ed-b1fd-756256e5473e", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:50:14.322Z [Rudder] debug: no existing flush timer, creating new one
+17:20:14.334   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:20:23.037   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:20:24.088   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+2026-02-21T11:50:24.324Z [Rudder] debug: in flush
+2026-02-21T11:50:24.324Z [Rudder] debug: cancelling existing flushTimer...
+17:20:25.834   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "428783c9-0993-45ed-b1fd-756256e5473e", "newVersionId": "ea052689-e071-44b5-885e-8dd6af2b241e", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:50:25.944Z [Rudder] debug: no existing flush timer, creating new one
+17:20:25.961   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:50:35.950Z [Rudder] debug: in flush
+2026-02-21T11:50:35.950Z [Rudder] debug: cancelling existing flushTimer...
+17:20:38.836   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:39.354   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:40.910   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "ea052689-e071-44b5-885e-8dd6af2b241e", "newVersionId": "28045471-42b7-4c7a-a5d1-9cdb55d5d8c9", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:50:40.931Z [Rudder] debug: no existing flush timer, creating new one
+17:20:40.957   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:20:41.059   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:41.189   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:42.236   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:42.437   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:42.655   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:43.066   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:44.611   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "28045471-42b7-4c7a-a5d1-9cdb55d5d8c9", "newVersionId": "cfcdf424-4cc9-4e76-8002-d025028e1508", "file": "workflow.service.js", "function": "update" }[22m
+17:20:44.648   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:50:50.932Z [Rudder] debug: in flush
+2026-02-21T11:50:50.932Z [Rudder] debug: cancelling existing flushTimer...
+17:20:54.318   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:20:55.863   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "cfcdf424-4cc9-4e76-8002-d025028e1508", "newVersionId": "2d9322f9-3f81-43fe-a5f8-107e420b4fd9", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:50:55.882Z [Rudder] debug: no existing flush timer, creating new one
+17:20:55.891   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:51:05.895Z [Rudder] debug: in flush
+2026-02-21T11:51:05.895Z [Rudder] debug: cancelling existing flushTimer...
+17:21:09.853   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:21:11.391   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "2d9322f9-3f81-43fe-a5f8-107e420b4fd9", "newVersionId": "72d359c8-5e19-49b1-ae0a-6fe903566f61", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:51:11.413Z [Rudder] debug: no existing flush timer, creating new one
+17:21:11.420   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:21:21.180   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+2026-02-21T11:51:21.424Z [Rudder] debug: in flush
+2026-02-21T11:51:21.424Z [Rudder] debug: cancelling existing flushTimer...
+17:21:22.731   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "72d359c8-5e19-49b1-ae0a-6fe903566f61", "newVersionId": "66a459b8-5ef0-4961-a8f2-f1b7669cef45", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:51:22.751Z [Rudder] debug: no existing flush timer, creating new one
+17:21:22.763   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:21:23.043   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+2026-02-21T11:51:32.757Z [Rudder] debug: in flush
+2026-02-21T11:51:32.757Z [Rudder] debug: cancelling existing flushTimer...
+17:21:33.318   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:21:34.865   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "66a459b8-5ef0-4961-a8f2-f1b7669cef45", "newVersionId": "3cee7463-6028-4a35-b337-bb2e56b14f8d", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:51:34.905Z [Rudder] debug: no existing flush timer, creating new one
+17:21:34.916   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:21:42.092   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:21:43.635   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "3cee7463-6028-4a35-b337-bb2e56b14f8d", "newVersionId": "ab9c1066-0d6d-4d97-9448-bfb9a691b76f", "file": "workflow.service.js", "function": "update" }[22m
+17:21:43.670   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:51:44.909Z [Rudder] debug: in flush
+2026-02-21T11:51:44.909Z [Rudder] debug: cancelling existing flushTimer...
+17:21:52.106   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:21:53.654   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "ab9c1066-0d6d-4d97-9448-bfb9a691b76f", "newVersionId": "a5dd7c51-0647-48ba-b8e9-ada22e8574c5", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:51:53.676Z [Rudder] debug: no existing flush timer, creating new one
+17:21:53.687   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:22:01.010   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:22:02.553   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "a5dd7c51-0647-48ba-b8e9-ada22e8574c5", "newVersionId": "4201e8ad-068e-491e-9534-b6c31311ff6c", "file": "workflow.service.js", "function": "update" }[22m
+17:22:02.582   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:52:03.681Z [Rudder] debug: in flush
+2026-02-21T11:52:03.682Z [Rudder] debug: cancelling existing flushTimer...
+17:22:04.194   [34mdebug[39m   [34mRequest proxied to Axios failed[39m [2m{ "status": 401, "file": "request-helper-functions.js", "function": "proxyRequestToAxios" }[22m
+17:22:04.195   [34mdebug[39m   [34mOAuth2 token for "googleSheetsOAuth2Api" used by node "Temp-Node" expired. Should revalidate.[39m [2m{ "file": "request-helper-functions.js" }[22m
+17:22:04.550   [34mdebug[39m   [34mOAuth2 token for "googleSheetsOAuth2Api" used by node "Temp-Node" has been renewed.[39m [2m{ "file": "request-helper-functions.js" }[22m
+17:22:04.562   [34mdebug[39m   [34mOAuth2 token for "googleSheetsOAuth2Api" used by node "Temp-Node" has been saved to database successfully.[39m [2m{ "file": "request-helper-functions.js" }[22m
+17:22:23.046   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:22:25.811   [34mdebug[39m   [34mFound no executions to hard-delete[39m [2m{ "scopes": ["pruning"], "file": "executions-pruning.service.js", "function": "hardDelete" }[22m
+17:22:25.811   [34mdebug[39m   [34mHard-deletion in next 15 minutes[39m [2m{ "scopes": ["pruning"], "file": "executions-pruning.service.js", "function": "scheduleNextHardDeletion" }[22m
+17:22:27.359   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:22:27.423   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:22:28.982   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "4201e8ad-068e-491e-9534-b6c31311ff6c", "newVersionId": "a5151c25-1ae4-4c91-ab5b-ed85f474ed23", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:52:29.007Z [Rudder] debug: no existing flush timer, creating new one
+17:22:29.015   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:22:30.944   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:22:32.479   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "a5151c25-1ae4-4c91-ab5b-ed85f474ed23", "newVersionId": "1234ccd2-3783-4869-8a73-68889909623d", "file": "workflow.service.js", "function": "update" }[22m
+17:22:32.517   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:52:39.010Z [Rudder] debug: in flush
+2026-02-21T11:52:39.010Z [Rudder] debug: cancelling existing flushTimer...
+17:22:41.184   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:22:41.259   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:22:42.800   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "1234ccd2-3783-4869-8a73-68889909623d", "newVersionId": "e26ea9bf-bf3f-492b-8a16-b30e7e3e26e5", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:52:42.820Z [Rudder] debug: no existing flush timer, creating new one
+17:22:42.830   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:22:44.462   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:22:45.995   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "e26ea9bf-bf3f-492b-8a16-b30e7e3e26e5", "newVersionId": "3a8b8247-61a4-44a9-8c12-e19ec8ad5a88", "file": "workflow.service.js", "function": "update" }[22m
+17:22:46.028   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:52:52.822Z [Rudder] debug: in flush
+2026-02-21T11:52:52.822Z [Rudder] debug: cancelling existing flushTimer...
+17:22:55.383   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:22:56.926   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "3a8b8247-61a4-44a9-8c12-e19ec8ad5a88", "newVersionId": "a23c21ff-d601-489d-a3a4-2e298b9a0a9f", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:52:56.951Z [Rudder] debug: no existing flush timer, creating new one
+17:22:56.959   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:22:59.392   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:22:59.899   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:00.191   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:00.513   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:01.817   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:03.358   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "a23c21ff-d601-489d-a3a4-2e298b9a0a9f", "newVersionId": "9c8b7fde-29b8-483c-965e-5dc7474c9379", "file": "workflow.service.js", "function": "update" }[22m
+17:23:03.388   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:53:06.953Z [Rudder] debug: in flush
+2026-02-21T11:53:06.954Z [Rudder] debug: cancelling existing flushTimer...
+17:23:10.248   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:10.719   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:11.033   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:11.865   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:13.411   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "9c8b7fde-29b8-483c-965e-5dc7474c9379", "newVersionId": "b219ba7c-56dc-4756-9aef-252bbaa77354", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:53:13.433Z [Rudder] debug: no existing flush timer, creating new one
+17:23:13.444   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:23:22.136   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:22.588   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:22.838   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:23.059   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:23:23.331   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+2026-02-21T11:53:23.439Z [Rudder] debug: in flush
+2026-02-21T11:53:23.439Z [Rudder] debug: cancelling existing flushTimer...
+17:23:23.564   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:24.664   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:26.195   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "b219ba7c-56dc-4756-9aef-252bbaa77354", "newVersionId": "e2873036-7e3c-4501-a51d-bdb04afd90bf", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:53:26.219Z [Rudder] debug: no existing flush timer, creating new one
+17:23:26.226   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:53:36.247Z [Rudder] debug: in flush
+2026-02-21T11:53:36.247Z [Rudder] debug: cancelling existing flushTimer...
+17:23:37.268   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:38.810   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "e2873036-7e3c-4501-a51d-bdb04afd90bf", "newVersionId": "bc8ca468-f5bf-4d8c-bf8c-2ce9c6a310f8", "file": "workflow.service.js", "function": "update" }[22m
+2026-02-21T11:53:38.832Z [Rudder] debug: no existing flush timer, creating new one
+17:23:38.841   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+17:23:38.869   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:39.135   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:39.446   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:40.550   [34mdebug[39m   [34mReceived message from editor-UI[39m [2m{ "pushRef": "leivgfk004", "msg": { "type": "writeAccessRequested", "workflowId": "5soejoAjvOyYwvtO" }, "file": "abstract.push.js", "function": "onMessageReceived" }[22m
+17:23:42.090   [34mdebug[39m   [34mUpdating versionId for workflow 5soejoAjvOyYwvtO for user 50b53648-6970-432c-93c0-16b219e101ea after saving[39m [2m{ "previousVersionId": "bc8ca468-f5bf-4d8c-bf8c-2ce9c6a310f8", "newVersionId": "8f6bb95c-67d6-47d2-9e4e-c663a1941581", "file": "workflow.service.js", "function": "update" }[22m
+17:23:42.125   [34mdebug[39m   [34mWorkflow draft dependency index updated for workflow 5soejoAjvOyYwvtO[39m [2m{ "file": "workflow-index.service.js" }[22m
+2026-02-21T11:53:48.837Z [Rudder] debug: in flush
+2026-02-21T11:53:48.837Z [Rudder] debug: cancelling existing flushTimer...
+17:24:23.063   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:24:39.061   [34mdebug[39m   [34mExecution added[39m [2m{ "executionId": "2", "file": "active-executions.js", "function": "add" }[22m
+17:24:39.080   [34mdebug[39m   [34mExecution for workflow FirstHour - Cybercrime Response Pipeline (Groq + Real Data) was assigned id 2[39m [2m{ "executionId": "2", "file": "workflow-runner.js", "function": "runMainProcess" }[22m
+17:24:39.086   [34mdebug[39m   [34mExecution ID 2 had Execution data. Running with payload.[39m [2m{ "executionId": "2", "file": "workflow-runner.js", "function": "runMainProcess" }[22m
+17:24:39.087   [34mdebug[39m   [34mWorkflow execution started[39m [2m{ "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:24:39.098   [34mdebug[39m   [34mStarted execution of workflow "FirstHour - Cybercrime Response Pipeline (Groq + Real Data)" from webhook with execution ID 2[39m [2m{ "executionId": "2", "file": "webhook-helpers.js", "function": "executeWebhook" }[22m
+17:24:39.098   [34mdebug[39m   [34mExecuting hook (hookFunctionsPush)[39m [2m{ "executionId": "2", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:24:39.099   [34mdebug[39m   [34mPushed to frontend: executionStarted[39m [2m{ "dataType": "executionStarted", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:24:39.100   [34mdebug[39m   [34mPushed to frontend: testWebhookReceived[39m [2m{ "dataType": "testWebhookReceived", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:24:39.101   [34mdebug[39m   [34mStart executing node "Webhook Trigger"[39m [2m{ "node": "Webhook Trigger", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:24:39.102   [34mdebug[39m   [34mExecuting hook on node "Webhook Trigger" (hookFunctionsPush)[39m [2m{ "executionId": "2", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:24:39.102   [34mdebug[39m   [34mPushed to frontend: nodeExecuteBefore[39m [2m{ "dataType": "nodeExecuteBefore", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:24:39.102   [34mdebug[39m   [34mRunning node "Webhook Trigger" started[39m [2m{ "node": "Webhook Trigger", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:24:39.104   [34mdebug[39m   [34mRunning node "Webhook Trigger" finished successfully[39m [2m{ "node": "Webhook Trigger", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:24:39.105   [34mdebug[39m   [34mExecuting hook on node "Webhook Trigger" (hookFunctionsPush)[39m [2m{ "executionId": "2", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:24:39.105   [34mdebug[39m   [34mPushed to frontend: nodeExecuteAfter[39m [2m{ "dataType": "nodeExecuteAfter", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:24:39.106   [34mdebug[39m   [34mPushed to frontend: nodeExecuteAfterData[39m [2m{ "dataType": "nodeExecuteAfterData", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:24:39.107   [34mdebug[39m   [34mStart executing node "Fetch Helpline Database"[39m [2m{ "node": "Fetch Helpline Database", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:24:39.107   [34mdebug[39m   [34mExecuting hook on node "Fetch Helpline Database" (hookFunctionsPush)[39m [2m{ "executionId": "2", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:24:39.107   [34mdebug[39m   [34mPushed to frontend: nodeExecuteBefore[39m [2m{ "dataType": "nodeExecuteBefore", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:24:39.108   [34mdebug[39m   [34mRunning node "Fetch Helpline Database" started[39m [2m{ "node": "Fetch Helpline Database", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:24:40.233   [34mdebug[39m   [34mRunning node "Fetch Helpline Database" finished successfully[39m [2m{ "node": "Fetch Helpline Database", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:24:40.233   [34mdebug[39m   [34mExecuting hook on node "Fetch Helpline Database" (hookFunctionsPush)[39m [2m{ "executionId": "2", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:24:40.233   [34mdebug[39m   [34mPushed to frontend: nodeExecuteAfter[39m [2m{ "dataType": "nodeExecuteAfter", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:24:40.234   [34mdebug[39m   [34mPushed to frontend: nodeExecuteAfterData[39m [2m{ "dataType": "nodeExecuteAfterData", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:24:40.234   [34mdebug[39m   [34mWorkflow execution finished successfully[39m [2m{ "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+2026-02-21T11:54:40.252Z [Rudder] debug: no existing flush timer, creating new one
+17:24:40.253   [34mdebug[39m   [34mExecuting hook (hookFunctionsSave)[39m [2m{ "executionId": "2", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:24:40.255   [34mdebug[39m   [34mSave execution data to database for execution ID 2[39m [2m{ "executionId": "2", "workflowId": "5soejoAjvOyYwvtO", "finished": true, "stoppedAt": "2026-02-21T11: 54: 40.234Z", "file": "shared-hook-functions.js", "function": "updateExistingExecution" }[22m
+17:24:40.261   [34mdebug[39m   [34mExecuting hook (hookFunctionsPush)[39m [2m{ "executionId": "2", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:24:40.262   [34mdebug[39m   [34mPushed to frontend: executionFinished[39m [2m{ "dataType": "executionFinished", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:24:40.264   [34mdebug[39m   [34mExecution response promise cleaned[39m [2m{ "executionId": "2", "file": "active-executions.js", "function": "resolveExecutionResponsePromise" }[22m
+17:24:40.265   [34mdebug[39m   [34mExecution finalized[39m [2m{ "executionId": "2", "file": "active-executions.js", "function": "finalizeExecution" }[22m
+17:24:40.265   [34mdebug[39m   [34mExecution removed[39m [2m{ "executionId": "2", "file": "active-executions.js" }[22m
+2026-02-21T11:54:50.256Z [Rudder] debug: in flush
+2026-02-21T11:54:50.256Z [Rudder] debug: cancelling existing flushTimer...
+17:25:23.067   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:26:01.086   [31merror[39m   [31m[31m404 The requested webhook "firsthour" is not registered.[31m[39m [2m{ "file": "response-helper.js", "function": "sendErrorResponse" }[22m
+17:26:23.072   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+17:27:19.351   [34mdebug[39m   [34mExecution added[39m [2m{ "executionId": "3", "file": "active-executions.js", "function": "add" }[22m
+17:27:19.358   [34mdebug[39m   [34mExecution for workflow FirstHour - Cybercrime Response Pipeline (Groq + Real Data) was assigned id 3[39m [2m{ "executionId": "3", "file": "workflow-runner.js", "function": "runMainProcess" }[22m
+17:27:19.361   [34mdebug[39m   [34mExecution ID 3 had Execution data. Running with payload.[39m [2m{ "executionId": "3", "file": "workflow-runner.js", "function": "runMainProcess" }[22m
+17:27:19.361   [34mdebug[39m   [34mWorkflow execution started[39m [2m{ "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:27:19.364   [34mdebug[39m   [34mStarted execution of workflow "FirstHour - Cybercrime Response Pipeline (Groq + Real Data)" from webhook with execution ID 3[39m [2m{ "executionId": "3", "file": "webhook-helpers.js", "function": "executeWebhook" }[22m
+17:27:19.364   [34mdebug[39m   [34mExecuting hook (hookFunctionsPush)[39m [2m{ "executionId": "3", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:27:19.365   [34mdebug[39m   [34mPushed to frontend: executionStarted[39m [2m{ "dataType": "executionStarted", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:27:19.365   [34mdebug[39m   [34mPushed to frontend: testWebhookReceived[39m [2m{ "dataType": "testWebhookReceived", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:27:19.365   [34mdebug[39m   [34mStart executing node "Webhook Trigger"[39m [2m{ "node": "Webhook Trigger", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:27:19.366   [34mdebug[39m   [34mExecuting hook on node "Webhook Trigger" (hookFunctionsPush)[39m [2m{ "executionId": "3", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:27:19.366   [34mdebug[39m   [34mPushed to frontend: nodeExecuteBefore[39m [2m{ "dataType": "nodeExecuteBefore", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:27:19.366   [34mdebug[39m   [34mRunning node "Webhook Trigger" started[39m [2m{ "node": "Webhook Trigger", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:27:19.366   [34mdebug[39m   [34mRunning node "Webhook Trigger" finished successfully[39m [2m{ "node": "Webhook Trigger", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:27:19.367   [34mdebug[39m   [34mExecuting hook on node "Webhook Trigger" (hookFunctionsPush)[39m [2m{ "executionId": "3", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:27:19.367   [34mdebug[39m   [34mPushed to frontend: nodeExecuteAfter[39m [2m{ "dataType": "nodeExecuteAfter", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:27:19.367   [34mdebug[39m   [34mPushed to frontend: nodeExecuteAfterData[39m [2m{ "dataType": "nodeExecuteAfterData", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:27:19.368   [34mdebug[39m   [34mStart executing node "Fetch Helpline Database"[39m [2m{ "node": "Fetch Helpline Database", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:27:19.368   [34mdebug[39m   [34mExecuting hook on node "Fetch Helpline Database" (hookFunctionsPush)[39m [2m{ "executionId": "3", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:27:19.368   [34mdebug[39m   [34mPushed to frontend: nodeExecuteBefore[39m [2m{ "dataType": "nodeExecuteBefore", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:27:19.369   [34mdebug[39m   [34mRunning node "Fetch Helpline Database" started[39m [2m{ "node": "Fetch Helpline Database", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:27:20.485   [34mdebug[39m   [34mRunning node "Fetch Helpline Database" finished successfully[39m [2m{ "node": "Fetch Helpline Database", "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+17:27:20.486   [34mdebug[39m   [34mExecuting hook on node "Fetch Helpline Database" (hookFunctionsPush)[39m [2m{ "executionId": "3", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:27:20.486   [34mdebug[39m   [34mPushed to frontend: nodeExecuteAfter[39m [2m{ "dataType": "nodeExecuteAfter", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:27:20.486   [34mdebug[39m   [34mPushed to frontend: nodeExecuteAfterData[39m [2m{ "dataType": "nodeExecuteAfterData", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:27:20.486   [34mdebug[39m   [34mWorkflow execution finished successfully[39m [2m{ "workflowId": "5soejoAjvOyYwvtO", "file": "logger-proxy.js", "function": "exports.debug" }[22m
+2026-02-21T11:57:20.491Z [Rudder] debug: no existing flush timer, creating new one
+17:27:20.492   [34mdebug[39m   [34mExecuting hook (hookFunctionsSave)[39m [2m{ "executionId": "3", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:27:20.493   [34mdebug[39m   [34mSave execution data to database for execution ID 3[39m [2m{ "executionId": "3", "workflowId": "5soejoAjvOyYwvtO", "finished": true, "stoppedAt": "2026-02-21T11: 57: 20.486Z", "file": "shared-hook-functions.js", "function": "updateExistingExecution" }[22m
+17:27:20.503   [34mdebug[39m   [34mExecuting hook (hookFunctionsPush)[39m [2m{ "executionId": "3", "pushRef": "leivgfk004", "workflowId": "5soejoAjvOyYwvtO", "file": "execution-lifecycle-hooks.js" }[22m
+17:27:20.503   [34mdebug[39m   [34mPushed to frontend: executionFinished[39m [2m{ "dataType": "executionFinished", "pushRefs": "leivgfk004", "file": "abstract.push.js", "function": "sendTo" }[22m
+17:27:20.504   [34mdebug[39m   [34mExecution response promise cleaned[39m [2m{ "executionId": "3", "file": "active-executions.js", "function": "resolveExecutionResponsePromise" }[22m
+17:27:20.504   [34mdebug[39m   [34mExecution finalized[39m [2m{ "executionId": "3", "file": "active-executions.js", "function": "finalizeExecution" }[22m
+17:27:20.504   [34mdebug[39m   [34mExecution removed[39m [2m{ "executionId": "3", "file": "active-executions.js" }[22m
+17:27:23.076   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m
+2026-02-21T11:57:30.493Z [Rudder] debug: in flush
+2026-02-21T11:57:30.493Z [Rudder] debug: cancelling existing flushTimer...
+17:28:23.081   [34mdebug[39m   [34mQuerying database for waiting executions[39m [2m{ "scopes": ["waiting-executions"], "file": "wait-tracker.js", "function": "getWaitingExecutions" }[22m

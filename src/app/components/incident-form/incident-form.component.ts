@@ -89,12 +89,32 @@ export class IncidentFormComponent implements OnInit {
         const report: IncidentReport = this.form.value;
 
         this.firsthourService.submitCase(report).subscribe({
-            next: (result) => {
+            next: (rawResult) => {
                 this.isSubmitting = false;
+                let result = rawResult;
+                if (typeof result === 'string') {
+                    try { result = JSON.parse(result); } catch (e) { }
+                }
+                // Handle nested stringified objects from n8n if any
+                if (result && typeof result.whatHappened === 'string') {
+                    try { result.whatHappened = JSON.parse(result.whatHappened); } catch (e) { }
+                }
+                if (result && typeof result.evidenceChecklist === 'string') {
+                    try { result.evidenceChecklist = JSON.parse(result.evidenceChecklist); } catch (e) { }
+                }
+
+                // Format evidenceChecklist strings to objects if n8n returned an array of strings
+                if (result && Array.isArray(result.evidenceChecklist) && result.evidenceChecklist.length > 0 && typeof result.evidenceChecklist[0] === 'string') {
+                    result.evidenceChecklist = (result.evidenceChecklist as any[]).map((text: any, id: number) => ({ id, text, checked: false }));
+                }
+
                 this.router.navigate(['/results'], { state: { result, report } });
             },
             error: () => {
                 this.isSubmitting = false;
+                // If it truly failed, try navigating with mock data
+                const mockResult = (this.firsthourService as any).getMockResult(report);
+                this.router.navigate(['/results'], { state: { result: mockResult, report } });
             }
         });
     }

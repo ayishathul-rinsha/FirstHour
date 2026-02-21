@@ -220,25 +220,26 @@
                     {{ copied ? 'Copied!' : 'Copy to Clipboard' }}
                 </button>
 
-                <button class="action-btn primary" (click)="sendOfficialEmails()"
-                    [disabled]="emailsSending || emailsSent">
-                    <span *ngIf="!emailsSending && !emailsSent">
+                <button class="action-btn primary" (click)="downloadCaseLogs()" [disabled]="downloadingPdf">
+                    <span *ngIf="!downloadingPdf">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" width="18" height="18">
-                            <line x1="22" y1="2" x2="11" y2="13" />
-                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
-                        Email me this guide & start tracking
+                        Download Case Logs for Police
                     </span>
-                    <span *ngIf="emailsSending">Sending to your inbox...</span>
-                    <span *ngIf="emailsSent">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" width="18" height="18">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        Sent! We'll follow up with you.
-                    </span>
+                    <span *ngIf="downloadingPdf">Generating Secure PDF...</span>
                 </button>
+            </div>
+
+            <div class="email-instruction-box">
+                <h4>What to do next:</h4>
+                <p>1. <strong>Download</strong> the PDF using the button above.</p>
+                <p>2. <strong>Email</strong> the PDF to your bank's <span style="color:var(--accent-amber)">Nodal
+                        Officer</span> (listed below).</p>
+                <p>3. <strong>Print</strong> a copy and take it to your local police station to file an FIR.</p>
             </div>
         </div>
 

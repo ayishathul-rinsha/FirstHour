@@ -114,6 +114,46 @@
     }
 }
 
+.helpline-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.helpline-contact a {
+    color: var(--accent-amber);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.helpline-contact a:hover {
+    color: var(--accent-orange);
+    text-decoration: underline;
+}
+
+.email-instruction-box {
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    background: rgba(45, 212, 191, 0.05);
+    border-left: 4px solid var(--accent-teal);
+    border-radius: 4px 8px 8px 4px;
+    font-size: 0.95rem;
+}
+
+.email-instruction-box h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.email-instruction-box p {
+    margin: 0.3rem 0;
+    color: var(--text-secondary);
+}
+
 .card-header {
     display: flex;
     align-items: center;

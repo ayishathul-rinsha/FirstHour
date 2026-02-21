@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CaseResult, IncidentReport, EvidenceItem, ActionStep, FollowUpMessage, FollowUpRequest } from '../../models/models';
 import { FirsthourService } from '../../services/firsthour.service';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
     selector: 'app-results-dashboard',
@@ -166,14 +168,56 @@ export class ResultsDashboardComponent implements OnInit, OnDestroy {
         return `conic-gradient(${this.getRecoveryColor()} ${pct * 3.6}deg, var(--surface-secondary) 0deg)`;
     }
 
-    emailsSending = false;
-    emailsSent = false;
+    downloadingPdf = false;
 
-    sendOfficialEmails(): void {
-        this.emailsSending = true;
-        this.firsthourService.triggerOfficialEmails(this.report).subscribe(res => {
-            this.emailsSending = false;
-            this.emailsSent = true;
+    downloadCaseLogs(): void {
+        this.downloadingPdf = true;
+        const dashboardElement = document.querySelector('.dashboard-container') as HTMLElement;
+
+        if (!dashboardElement) {
+            this.downloadingPdf = false;
+            return;
+        }
+
+        // Add a temporary class to optimize for PDF capture (e.g. expand all sections, hide buttons)
+        dashboardElement.classList.add('pdf-capture-mode');
+
+        html2canvas(dashboardElement, {
+            scale: 2, // higher resolution
+            useCORS: true,
+            logging: false
+        }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+            let heightLeft = pdfHeight;
+            let position = 0;
+
+            pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+            heightLeft -= pdf.internal.pageSize.getHeight();
+
+            while (heightLeft >= 0) {
+                position = heightLeft - pdfHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+                heightLeft -= pdf.internal.pageSize.getHeight();
+            }
+
+            pdf.save(`FirstHour_CaseLog_${new Date().getTime()}.pdf`);
+
+            dashboardElement.classList.remove('pdf-capture-mode');
+            this.downloadingPdf = false;
+        }).catch(err => {
+            console.error('PDF generation failed', err);
+            dashboardElement.classList.remove('pdf-capture-mode');
+            this.downloadingPdf = false;
         });
     }
 

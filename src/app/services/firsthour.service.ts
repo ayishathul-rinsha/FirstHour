@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, delay } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { IncidentReport, CaseResult, FollowUpRequest, FollowUpResponse } from '../models/models';
+import { Observable, of, delay, forkJoin } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { IncidentReport, CaseResult, FollowUpRequest, FollowUpResponse, Helpline } from '../models/models';
 import { environment } from '../../environments/environment';
+import * as Papa from 'papaparse';
 
 @Injectable({
     providedIn: 'root'
@@ -17,31 +18,187 @@ export class FirsthourService {
             return of(this.getMockResult(report)).pipe(delay(2500));
         }
 
-        return this.http.post<CaseResult>(environment.n8nWebhookUrl, report).pipe(
-            catchError(() => of(this.getMockResult(report)))
+        const apiKey = environment.groqApiKey;
+        if (!apiKey) {
+            console.warn('No Groq API key found, falling back to mock data');
+            return of(this.getMockResult(report)).pipe(delay(1000));
+        }
+
+        const prompt = `
+You are an expert Indian cybercrime legal advisor and cybersecurity expert.
+A victim has just submitted the following incident report:
+- Incident Type: ${report.incidentType}
+- Description: ${report.description}
+- Amount Lost: ₹${report.amountLost || 'N/A'}
+- Payment Platform: ${report.paymentPlatform || 'N/A'}
+- Time: ${report.incidentTime}
+
+Analyze this report and provide a comprehensive response IN STRICT JSON FORMAT ONLY. Do not use markdown blocks like \`\`\`json. Just output the raw JSON object.
+Use this EXACT schema:
+{
+  "whatHappened": {
+    "crimeType": "Plain English Classification",
+    "summary": "2-3 sentences explaining exactly how the scam worked based on their description",
+    "reassurance": "Empathetic acknowledgment (1-2 sentences) reassuring them that this is common and they are doing the right thing."
+  },
+  "evidenceChecklist": [
+    { "id": 1, "text": "Specific evidence to save (e.g. Call logs)", "checked": false },
+    { "id": 2, "text": "Another specific evidence", "checked": false }
+  ],
+  "legalProtections": [
+    {
+      "title": "Friendly title",
+      "section": "Section reference (e.g. IT Act Section 66C)",
+      "explanation": "Plain English explanation",
+      "howItHelps": "How this protects the victim"
+    }
+  ],
+  "recoveryWindow": {
+    "percentage": [number between 15-90],
+    "message": "Hopeful message about their recovery window",
+    "hoursRemaining": [number representing hours left in typical 24-72h chargeback window based on incident time],
+    "encouragement": "A short encouraging sentence"
+  },
+  "actionPlan": [
+    {
+      "timeframe": "30min",
+      "label": "Right Now",
+      "description": "Why these steps matter",
+      "steps": ["Call 1930", "Freeze bank account"],
+      "done": false
+    },
+    {
+      "timeframe": "2hr",
+      "label": "Within 2 Hours",
+      "description": "Why these steps matter",
+      "steps": ["Visit branch", "Get written acknowledgment"],
+      "done": false
+    },
+    {
+      "timeframe": "24hr",
+      "label": "By Tomorrow",
+      "description": "Why these steps matter",
+      "steps": ["File FIR at police station"],
+      "done": false
+    }
+  ],
+  "complaintDraft": "A COMPLETE FIR complaint draft with placeholders like [Your Full Name]. Reference IT Act sections. Use \\n for line breaks."
+}
+        `;
+
+        const headers = {
+            'Authorization': 'Bearer ' + apiKey,
+            'Content-Type': 'application/json'
+        };
+
+        const body = {
+            model: 'llama-3.3-70b-versatile',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.2,
+            max_tokens: 3000,
+            response_format: { type: "json_object" }
+        };
+
+        const aiCall$ = this.http.post<any>('https://api.groq.com/openai/v1/chat/completions', body, { headers }).pipe(
+            map(response => {
+                const content = response.choices[0].message.content;
+                return JSON.parse(content) as CaseResult;
+            })
+        );
+
+        const csvCall$ = this.http.get('assets/helplines.csv', { responseType: 'text' }).pipe(
+            map(csvData => {
+                const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
+                return parsed.data as any[];
+            }),
+            catchError(() => of([])) // Return empty array if CSV fails to load
+        );
+
+        return forkJoin({ aiResult: aiCall$, helplinesData: csvCall$ }).pipe(
+            map(({ aiResult, helplinesData }) => {
+                const platform = (report.paymentPlatform || '').toLowerCase();
+
+                // Find matching helplines based on platform name
+                let matched = helplinesData.filter(h => {
+                    const bankName = (h['Bank/Platform'] || '').toLowerCase();
+                    const platLower = platform.toLowerCase();
+                    return platLower.includes(bankName) || bankName.includes(platLower.split(' ')[0]);
+                });
+
+                // Always include National Cyber Crime
+                const national = helplinesData.filter(h => {
+                    const name = (h['Bank/Platform'] || '').toLowerCase();
+                    return name.includes('national') || name.includes('rbi') || name.includes('police');
+                });
+
+                // Combine and map to the Helpline interface
+                const relevantRaw = [...matched, ...national];
+
+                // Deduplicate by bankPlatform and format safely
+                const uniqueMap = new Map();
+                for (const raw of relevantRaw) {
+                    if (raw['Bank/Platform'] && !uniqueMap.has(raw['Bank/Platform'])) {
+                        uniqueMap.set(raw['Bank/Platform'], {
+                            bankPlatform: raw['Bank/Platform'] || 'Unknown',
+                            fraudHelpline: raw['Fraud Helpline'] || '1930',
+                            nodalOfficerEmail: raw['Nodal Officer Email'] || 'complaint-cyber@gov.in',
+                            chargebackWindow: raw['Chargeback Window (Hours)'] || '72',
+                            officialPortal: raw['Official Portal'] || 'https://cybercrime.gov.in'
+                        });
+                    }
+                }
+
+                aiResult.helplines = Array.from(uniqueMap.values());
+                return aiResult;
+            }),
+            catchError((err) => {
+                console.error('API or Parsing Error:', err);
+                return of(this.getMockResult(report));
+            })
         );
     }
 
     getFollowUp(request: FollowUpRequest): Observable<FollowUpResponse> {
         if (environment.useMockData) {
-            return of(this.getMockFollowUp(request)).pipe(delay(1200));
+            return of((this as any).getMockFollowUp(request)).pipe(delay(1200));
         }
 
-        const followUpUrl = environment.n8nWebhookUrl.replace('/firsthour', '/firsthour-followup');
-        return this.http.post<FollowUpResponse>(followUpUrl, request).pipe(
-            catchError(() => of(this.getMockFollowUp(request)))
+        const apiKey = environment.groqApiKey;
+        if (!apiKey) {
+            console.warn('No Groq API key found, falling back to mock data');
+            return of((this as any).getMockFollowUp(request));
+        }
+
+        const prompt = `
+You are the FirstHour guide, an empathetic assistant helping Indian cybercrime victims.
+            Crime: ${request.crimeType}
+Completed steps: ${request.completedSteps.join(', ')}
+Current Phase: ${request.currentPhase}
+User says: ${request.userMessage}
+
+Acknowledge their progress and tell them exactly what to do next.Output STRICT JSON only.
+            Schema: { "message": "Encouraging text", "nextSteps": ["step 1", "step 2"], "encouragement": "Short sign off" }
+        `;
+
+        const headers = { 'Authorization': 'Bearer ' + apiKey, 'Content-Type': 'application/json' };
+        const body = {
+            model: 'llama-3.3-70b-versatile',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.3,
+            max_tokens: 1000,
+            response_format: { type: "json_object" }
+        };
+
+        return this.http.post<any>('https://api.groq.com/openai/v1/chat/completions', body, { headers }).pipe(
+            map(response => JSON.parse(response.choices[0].message.content) as FollowUpResponse),
+            catchError(() => of((this as any).getMockFollowUp(request)))
         );
     }
 
     triggerOfficialEmails(report: IncidentReport): Observable<{ success: boolean }> {
-        if (environment.useMockData) {
-            return of({ success: true }).pipe(delay(2000));
-        }
-
-        const emailUrl = environment.n8nWebhookUrl.replace('/firsthour', '/firsthour-emails');
-        return this.http.post<{ success: boolean }>(emailUrl, report).pipe(
-            catchError(() => of({ success: false }))
-        );
+        // Since we are completely serverless now, we just mock the email success
+        // In a real production app, this would hit a cloud function (like Firebase or AWS Lambda) using SendGrid/Resend
+        return of({ success: true }).pipe(delay(2000));
     }
 
     private getMockFollowUp(request: FollowUpRequest): FollowUpResponse {

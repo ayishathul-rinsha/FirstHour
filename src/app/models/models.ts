@@ -34,6 +34,14 @@ export interface RecoveryWindow {
   encouragement: string;
 }
 
+export interface Helpline {
+  bankPlatform: string;
+  fraudHelpline: string;
+  nodalOfficerEmail: string;
+  chargebackWindow: string;
+  officialPortal: string;
+}
+
 export interface CaseResult {
   whatHappened: {
     crimeType: string;
@@ -45,6 +53,7 @@ export interface CaseResult {
   recoveryWindow: RecoveryWindow;
   actionPlan: ActionStep[];
   complaintDraft: string;
+  helplines: Helpline[];
 }
 
 export interface FollowUpMessage {
