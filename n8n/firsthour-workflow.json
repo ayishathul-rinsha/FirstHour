@@ -494,6 +494,48 @@
         440,
         1000
       ]
+    },
+    {
+      "parameters": {
+        "path": "firsthour-emails",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "webhook-emails",
+      "name": "Webhook - Send Emails",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        1000
+      ],
+      "webhookId": "firsthour-emails-endpoint"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"success\": true }",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-emails",
+      "name": "Respond Emails API",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        440,
+        1000
+      ]
     }
   ],
   "connections": {
