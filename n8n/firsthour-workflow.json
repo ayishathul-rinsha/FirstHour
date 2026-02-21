@@ -7,7 +7,8 @@
         "responseMode": "responseNode",
         "options": {
           "allowedOrigins": "*"
-        }
+        },
+        "httpMethod": "POST"
       },
       "id": "webhook-trigger",
       "name": "Webhook Trigger",
@@ -386,7 +387,8 @@
         "responseMode": "responseNode",
         "options": {
           "allowedOrigins": "*"
-        }
+        },
+        "httpMethod": "POST"
       },
       "id": "webhook-followup",
       "name": "Follow-Up Webhook",
@@ -459,7 +461,8 @@
         "responseMode": "responseNode",
         "options": {
           "allowedOrigins": "*"
-        }
+        },
+        "httpMethod": "POST"
       },
       "id": "webhook-emails",
       "name": "Webhook - Send Emails",
@@ -501,7 +504,8 @@
         "responseMode": "responseNode",
         "options": {
           "allowedOrigins": "*"
-        }
+        },
+        "httpMethod": "POST"
       },
       "id": "webhook-emails",
       "name": "Webhook - Send Emails",
