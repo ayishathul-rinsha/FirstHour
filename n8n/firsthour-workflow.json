@@ -452,6 +452,48 @@
         660,
         700
       ]
+    },
+    {
+      "parameters": {
+        "path": "firsthour-emails",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "webhook-emails",
+      "name": "Webhook - Send Emails",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        1000
+      ],
+      "webhookId": "firsthour-emails-endpoint"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"success\": true }",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-emails",
+      "name": "Respond Emails API",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        440,
+        1000
+      ]
     }
   ],
   "connections": {
@@ -560,16 +602,6 @@
             "node": "Log Case to Google Sheets",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Email Bank Fraud Desk",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Email Action Plan to Victim",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -634,6 +666,27 @@
         [
           {
             "node": "Respond Follow-Up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Send Emails": {
+      "main": [
+        [
+          {
+            "node": "Respond Emails API",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Bank Fraud Desk",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Action Plan to Victim",
             "type": "main",
             "index": 0
           }

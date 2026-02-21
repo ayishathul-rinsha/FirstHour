@@ -166,6 +166,17 @@ export class ResultsDashboardComponent implements OnInit, OnDestroy {
         return `conic-gradient(${this.getRecoveryColor()} ${pct * 3.6}deg, var(--surface-secondary) 0deg)`;
     }
 
+    emailsSending = false;
+    emailsSent = false;
+
+    sendOfficialEmails(): void {
+        this.emailsSending = true;
+        this.firsthourService.triggerOfficialEmails(this.report).subscribe(res => {
+            this.emailsSending = false;
+            this.emailsSent = true;
+        });
+    }
+
     startNewCase(): void {
         this.router.navigate(['/']);
     }

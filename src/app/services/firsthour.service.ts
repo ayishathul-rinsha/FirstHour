@@ -33,6 +33,17 @@ export class FirsthourService {
         );
     }
 
+    triggerOfficialEmails(report: IncidentReport): Observable<{ success: boolean }> {
+        if (environment.useMockData) {
+            return of({ success: true }).pipe(delay(2000));
+        }
+
+        const emailUrl = environment.n8nWebhookUrl.replace('/firsthour', '/firsthour-emails');
+        return this.http.post<{ success: boolean }>(emailUrl, report).pipe(
+            catchError(() => of({ success: false }))
+        );
+    }
+
     private getMockFollowUp(request: FollowUpRequest): FollowUpResponse {
         const completedCount = request.completedSteps.length;
         const phase = request.currentPhase;
