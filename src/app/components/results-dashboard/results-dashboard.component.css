@@ -1136,3 +1136,29 @@
     opacity: 0.4;
     cursor: not-allowed;
 }
+
+.complaint-box {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.complaint-textarea {
+    width: 100%;
+    min-height: 350px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    padding: 0;
+}
+
+.complaint-textarea:focus {
+    color: var(--text-primary);
+}

@@ -203,7 +203,8 @@
             <p class="card-subtitle-soft">This complaint is ready to submit. Just fill in your personal details and copy
                 it.</p>
             <div class="complaint-box">
-                <pre class="complaint-text">{{ result.complaintDraft }}</pre>
+                <textarea class="complaint-textarea" [(ngModel)]="result.complaintDraft" rows="18" spellcheck="false"
+                    placeholder="Your customized FIR draft will appear here..."></textarea>
             </div>
 
             <div class="button-group">
