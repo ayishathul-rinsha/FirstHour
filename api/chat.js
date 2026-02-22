@@ -1,5 +1,4 @@
-
-export default async function handler(req, res) {
+module.exports = async function (req, res) {
     // Enable CORS
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -60,4 +59,4 @@ export default async function handler(req, res) {
         console.error('Internal Proxy Exception:', error.message);
         return res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
-}
+};
